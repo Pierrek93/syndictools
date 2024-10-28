@@ -1,0 +1,301 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('images/bg.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+
+
+
+/* Header */
+header {
+    background-color: #1a2d4e;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #8eaecd;
+}
+
+/* Main Content */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Controls Section */
+.controls {
+    background-color: #203b66;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.controls h3 {
+    margin-bottom: 10px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    color: #d0e1f2;
+}
+
+.input-row label {
+    font-size: 16px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d0e1f2;
+}
+
+/* Input Container for Currency and Amount */
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #1a2d4e;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+.currency {
+    font-weight: bold;
+    color: #8eaecd;
+}
+
+.input-row input[type="checkbox"] {
+    accent-color: #8eaecd;
+    transform: scale(1.2);
+    margin-right: 8px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background-color: #1a2d4e;
+    color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #4b6688;
+}
+
+table th {
+    background-color: #263d5e;
+}
+
+table tr:last-child td {
+    font-weight: bold;
+    border-bottom: none;
+}
+
+/* Style for input fields inside table cells */
+td input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: transparent;
+    color: inherit;
+    text-align: left;
+}
+
+/* Style for the currency and input field in a table cell */
+.currency-input {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Style for the currency symbol */
+.currency {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+/* Full-width input field styling */
+.currency-input input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: transparent;
+    color: inherit;
+}
+
+/* Budget Layout Sections */
+.budget-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.section-top,
+.section-bot { /* Updated classes */
+    background-color: #203b66;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.section-top h3, /* Specific styling for section-top */
+.section-bot h3 { /* Specific styling for section-bot */
+    font-size: 1.2em;
+    color: #8eaecd;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #4b6688;
+    padding-bottom: 8px;
+}
+
+/* Remarks Section */
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #4b6688;
+    border-radius: 5px;
+    color: #333333;
+}
+
+/* Chart Container */
+.chart-container {
+    background-color: #1a2d4e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+.chart-container h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background-color: #1a2d4e;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #8eaecd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #b0c4de;
+}
+
+/* Recommendation Section */
+.recommendationSection {
+    background-color: #1a2d4e;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.recommendationSection h3 {
+    font-size: 18px;
+    color: #ffffff;
+    border-bottom: 1px solid #4b6688;
+    padding-bottom: 8px;
+}
+
+.amount-entry-row {
+    position: relative; /* Set relative positioning on the row */
+}
+
+/* Common Button Styles */
+.section-top .button, /* Targeting button within section-top */
+.section-bot .button { /* Targeting button within section-bot */
+    background-color: #1f86ab; /* Primary button color */
+    color: #ffffff; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    padding: 12px 20px; /* Padding for size */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    display: inline-block; /* Allows buttons to sit next to each other */
+    margin-right: 10px; /* Space between buttons */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Hover Effect */
+.section-top .button:hover, /* Targeting button hover within section-top */
+.section-bot .button:hover { /* Targeting button hover within section-bot */
+    background-color: #357ab8; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Active Effect */
+.section-top .button:active, /* Targeting button active within section-top */
+.section-bot .button:active { /* Targeting button active within section-bot */
+    background-color: #2e6f9c; /* Even darker shade when clicked */
+    transform: translateY(0); /* Return to original position */
+}

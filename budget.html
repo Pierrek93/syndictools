@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Budgetize Co-Ownership</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Budget Indicatif</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="budget.html">Budget</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="progress.html">Progress</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <button id="printButton">Print Budget to PDF</button>
+
+    <main id="mainContent">
+        <div class="budget-layout">
+            <div class="section-top">
+                <h3>Charges Courante</h3>
+                <table class="financialTable">
+                    <tr>
+                        <th></th>
+                        <th>Exercice réalisé</th>
+                        <th>Exercise à budgétiser</th>
+                    </tr>
+                    <tr class ='amount-entry-row' style = "display : none">
+                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                    </tr>
+                    <tr class ='amount-entry-row'>
+                        <td><input class="description-input" type="text" placeholder="Add text2323" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        
+                    </tr>
+                    <tr class ='amount-entry-row'>
+                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                    </tr>
+                    <tr class ='total-amount-row'>
+                        <td>TOTAL</td>
+                        <td><span class="amount-values">0.00</span></td>
+                        <td><span class="amount-values">0.00</span></td>
+                    </tr>
+                </table>
+                <button class="addRow button" type="button">+</button>
+                <button class="delete button" type="button">-</button>
+            </div>
+        
+            <div class="section-top">
+                <h3>Charges Exceptionnel</h3>
+                <table class="financialTable">
+                    <tr>
+                        <th></th>
+                        <th>Exercice réalisé</th>
+                        <th>Exercise à budgétiser</th>
+                    </tr>
+                    <tr class ='amount-entry-row' style = "display : none">
+                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                    </tr>
+                    <tr class ='amount-entry-row'>
+                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                    </tr>
+                    <tr class ='amount-entry-row'>
+                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
+                    </tr>
+                    <tr class="total-amount-row">
+                        <td>TOTAL</td>
+                        <td><span class="amount-values">0.00</span></td>
+                        <td><span class="amount-values">0.00</span></td>
+                    </tr>
+                </table>
+                <button class="addRow button" type="button">+</button>
+                <button class="delete button" ">-</button>
+
+            </div>
+        
+            <div class="section-bot">
+                <h3>Provision à Budgétiser</h3>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Annuel</th>
+                        <th>Trimestriel</th>
+                    </tr>
+                    <tr>
+                        <td>Provision Courante</td>
+                        <td><input type="text" value="0.00 €"></td>
+                        <td><input type="text" value="0.00 €"></td>
+                    </tr>
+                    <tr>
+                        <td>Appel Exceptionnel</td>
+                        <td><input type="text" value="0.00 €"></td>
+                        <td><input type="text" value="0.00 €"></td>
+                    </tr>
+                    <tr>
+                        <td>Appel Fonds de réserve</td>
+                        <td><input type="text" value="0.00 €"></td>
+                        <td><input type="text" value="0.00 €"></td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td><span class="currency">€</span><span id="totalProvisionAnnuel">0.00</span></td>
+                        <td><span class="currency">€</span><span id="totalProvisionTrimestriel">0.00</span></td>
+                    </tr>
+                </table>
+            </div>
+        
+            <div class="section-bot">
+                <h3>Recommendation pour le prochain exercice:</h3>                
+                <div class="input-row">
+                    <label>Fond de roulement minimum (5/12):</label>
+                    <div class="input-container">
+                        <span class="currency">€</span>
+                        <span id="fondDeRoulementTotal">0.00</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label>Cotisation Fond de réserve minimum annuel (5%):</label>
+                    <div class="input-container">
+                        <span class="currency">€</span>
+                        <span id="fondDeReserveTotal">0.00</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label>Provision trimestriel:</label>
+                    <div class="input-container">
+                        <span class="currency">€</span>
+                        <span id="provisionTotal">0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-house">
+            <div class="chart-container">
+                <h2>Budget Indicatif</h2>
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Allocation des fonds du dernier exercice réalisé:</h2>
+                <canvas id="myPieChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <li>Design: <a href="https://pierrek93.github.io/Personal-webpage/#" target="blank">Pierre Keane</a></li>
+    </footer>
+    
+    <script src="dom.js"></script>
+</body>
+</html>
