@@ -1,8 +1,5 @@
 //UPDATETOTALS FUNCTION
-function updateTotalsOnInput() {
-  const financialTables = document.querySelectorAll('.financialTable');
-
-  financialTables.forEach(table => {
+function updateTotalsOnInput(table) {
     const amountEntryRows = table.querySelectorAll('.amount-entry-row');
     const displayedTotals = table.querySelectorAll('.amount-values');
 
@@ -23,13 +20,14 @@ function updateTotalsOnInput() {
       displayedTotals[1].textContent = totalBudget.toFixed(2);
     };
 
-    amountEntryRows.forEach(row => {
-      const inputValues = row.querySelectorAll('.input-values');
-      inputValues.forEach(input => {
-        input.addEventListener('input', updateTotals);
-      });
-    });
-  });
+    updateTotals();
+
+    const tbody = table.querySelector('tbody')
+    tbody.addEventListener('input', (event) => {
+      if (event.target.matches('.input-values')) {
+        updateTotals();
+      }
+    })
 }
 
 
@@ -41,6 +39,7 @@ function manageTableRows() {
     const addButton = section.querySelector('.addRow');
     const deleteButton = section.querySelector('.deleteRow');
     const tbody = section.querySelector('tbody');
+    const financialTable = section.querySelector('.financialTable'); 
 
     // ADD ROWS FUNCTION
     const addRow = () => {
@@ -49,6 +48,8 @@ function manageTableRows() {
       const newRow = rowTemplate.cloneNode(true);
 
       tbody.insertBefore(newRow, totalAmountRow);
+
+      updateTotalsOnInput(financialTable);
     };
 
     // DELETE ROWS FUNCTION
@@ -58,6 +59,7 @@ function manageTableRows() {
 
       if (allRows.length > 1) {
         lastRow.remove();
+        updateTotalsOnInput(financialTable);
       } else {
         alert('Cannot delete the last row.');
       }
@@ -66,11 +68,12 @@ function manageTableRows() {
     // EVENT LISTENERS
     addButton.addEventListener('click', addRow);
     deleteButton.addEventListener('click', deleteRow);
+
+    updateTotalsOnInput(financialTable);
   });
 }
 
 //LOAD FUNCTIONS AFTER DOM LOADED
 document.addEventListener('DOMContentLoaded', function(){
-  updateTotalsOnInput();
   manageTableRows();
 });
