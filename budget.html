@@ -34,11 +34,6 @@
                         <th>Exercice réalisé</th>
                         <th>Exercise à budgétiser</th>
                     </tr>
-                    <tr class ='amount-entry-row' style = "display : none">
-                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
-                        <td><input class="input-values" type="number" placeholder="Enter amount" /></td>
-                        <td><input class="input-values" type="number" placeholder="Enter amount" /></td>
-                    </tr>
                     <tr class ='amount-entry-row'>
                         <td><input class="description-input" type="text" placeholder="Add text" /></td>
                         <td><input class="input-values" type="number" placeholder="Enter amount" /></td>
@@ -52,12 +47,12 @@
                     </tr>
                     <tr class ='total-amount-row'>
                         <td>TOTAL</td>
-                        <td><span class="amount-values">0.00</span></td>
-                        <td><span class="amount-values">0.00</span></td>
+                        <td><span class="currency">€</span><span class="amount-values">0.00</span></td>
+                        <td><span class="currency">€</span><span class="amount-values">0.00</span></td>
                     </tr>
                 </table>
                 <button class="addRow button" type="button">+</button>
-                <button class="delete button" type="button">-</button>
+                <button class="deleteRow button" type="button">-</button>
             </div>
         
             <div class="section-top">
@@ -67,11 +62,6 @@
                         <th></th>
                         <th>Exercice réalisé</th>
                         <th>Exercise à budgétiser</th>
-                    </tr>
-                    <tr class ='amount-entry-row' style = "display : none">
-                        <td><input class="description-input" type="text" placeholder="Add text" /></td>
-                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
-                        <td><input class="input-values" type="text" placeholder="Enter amount" /></td>
                     </tr>
                     <tr class ='amount-entry-row'>
                         <td><input class="description-input" type="text" placeholder="Add text" /></td>
@@ -85,12 +75,12 @@
                     </tr>
                     <tr class="total-amount-row">
                         <td>TOTAL</td>
-                        <td><span class="amount-values">0.00</span></td>
+                        <td><span class="currency">€</span><span class="amount-values">0.00</span></td>
                         <td><span class="amount-values">0.00</span></td>
                     </tr>
                 </table>
                 <button class="addRow button" type="button">+</button>
-                <button class="delete button" ">-</button>
+                <button class="deleteRow button">-</button>
 
             </div>
         
@@ -119,8 +109,8 @@
                     </tr>
                     <tr>
                         <td>TOTAL</td>
-                        <td><span class="currency">€</span><span id="totalProvisionAnnuel">0.00</span></td>
-                        <td><span class="currency">€</span><span id="totalProvisionTrimestriel">0.00</span></td>
+                        <td><span class="currency">€</span><span class="currency">€</span><span id="totalProvisionAnnuel">0.00</span></td>
+                        <td><span class="currency">€</span><span class="currency">€</span><span id="totalProvisionTrimestriel">0.00</span></td>
                     </tr>
                 </table>
             </div>
