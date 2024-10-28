@@ -26,10 +26,10 @@ function updateTotalsOnInput(table) {
     tbody.addEventListener('input', (event) => {
       if (event.target.matches('.input-values')) {
         updateTotals();
+        calculateRecommendations()
       }
     })
 }
-
 
 // MANAGE TABLES ROWS FUNCTION
 function manageTableRows() {
@@ -48,8 +48,8 @@ function manageTableRows() {
       const newRow = rowTemplate.cloneNode(true);
 
       tbody.insertBefore(newRow, totalAmountRow);
-
       updateTotalsOnInput(financialTable);
+      calculateRecommendations()
     };
 
     // DELETE ROWS FUNCTION
@@ -60,6 +60,7 @@ function manageTableRows() {
       if (allRows.length > 1) {
         lastRow.remove();
         updateTotalsOnInput(financialTable);
+        calculateRecommendations()
       } else {
         alert('Cannot delete the last row.');
       }
@@ -71,6 +72,32 @@ function manageTableRows() {
 
     updateTotalsOnInput(financialTable);
   });
+}
+
+//CALCULATERECOMMENDATIONS FUNCTION
+function calculateRecommendations() {
+  const financialTableSections = document.querySelectorAll('.section-top');
+  const recommendationSection = document.querySelector('#recommendations-section');
+  const workingCapitalElement = recommendationSection.querySelector('#workingCapitalTotal');
+  const reserveFundsElement = recommendationSection.querySelector('#reserveFundTotal');
+  const quarterlyProvisionElement = recommendationSection.querySelector('#provisionTotal');
+  
+  let totalUpcomingBudget = 0;
+
+  financialTableSections.forEach(table => {
+    const valueElements = table.querySelectorAll('.amount-values');
+
+    totalUpcomingBudget += parseFloat(valueElements[1].textContent) || 0;
+  })
+
+  let workingCapitalResult = (totalUpcomingBudget / 12) * 5;
+  let reserveFundResult = (totalUpcomingBudget/100) * 5;
+  let quarterlyProvisionResult = totalUpcomingBudget / 4;
+
+
+  reserveFundsElement.textContent = reserveFundResult.toFixed(2);
+  quarterlyProvisionElement.textContent = quarterlyProvisionResult.toFixed(2);
+  workingCapitalElement.textContent = workingCapitalResult.toFixed(2);
 }
 
 //LOAD FUNCTIONS AFTER DOM LOADED
