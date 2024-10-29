@@ -24,11 +24,13 @@ function updateTotalsOnInput(table) {
 
     const tbody = table.querySelector('tbody')
     tbody.addEventListener('input', (event) => {
-      if (event.target.matches('.input-values')) {
-        updateTotals();
-        calculateRecommendations()
+      if (event.target.matches('.input-values') || event.target.matches('.description-input')) {
+          updateTotals(); 
+          calculateRecommendations();
+          const {data, labels} = aggregateChartData(document.querySelectorAll('.financialTable')); 
+          RefreshPieChart({data, labels}); 
       }
-    })
+  });
 }
 
 // MANAGE TABLES ROWS FUNCTION
@@ -65,7 +67,9 @@ function manageTableRows() {
       if (allRows.length > 1) {
         lastRow.remove();
         updateTotalsOnInput(financialTable);
-        calculateRecommendations()
+        calculateRecommendations();
+        const {data, labels} = aggregateChartData(document.querySelectorAll('.financialTable'));
+        RefreshPieChart({data, labels});
       } else {
         alert('Cannot delete the last row.');
       }
@@ -104,6 +108,88 @@ function calculateRecommendations() {
   quarterlyProvisionElement.textContent = quarterlyProvisionResult.toFixed(2);
   workingCapitalElement.textContent = workingCapitalResult.toFixed(2);
 }
+
+
+// UPDATECHARTDATA FUNCTION
+function aggregateChartData(tables) {
+  let mergedArrayOfRealisedInputs = [];
+  let mergedLabels = [];
+
+  tables.forEach(table => {
+      const amountEntryRows = table.querySelectorAll('.amount-entry-row');
+
+      amountEntryRows.forEach(row => {
+          const inputValues = row.querySelectorAll('.input-values');
+          const realisedValue = parseFloat(inputValues[0].value) || 0;
+          mergedArrayOfRealisedInputs.push(realisedValue);
+          const label = row.querySelector('.description-input')?.value || `Item ${mergedLabels.length + 1}`;
+          mergedLabels.push(label);
+      });
+  });
+
+  console.log(mergedArrayOfRealisedInputs);
+  return { data: mergedArrayOfRealisedInputs, labels: mergedLabels }; 
+}
+
+
+//BARGRAPH
+// const barChart = document.getElementById('myBarChart');
+// new Chart(barChart, {
+//   type: 'bar',
+//   data: {
+//     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//     datasets: [
+//       {
+//       label: '2021 sales',
+//       data: [120, 180, 130, 260],
+//       borderWidth: 1
+//       },
+//       {
+//         label: '2022 Sales',
+//         data: [120, 180, 130, 260],
+//         borderWidth: 2
+//     },
+//   ]
+//   },
+//   options: {
+//     scales: {
+//       y: {
+//         beginAtZero: true,
+//       }
+//     }
+//   }
+// });
+
+//CREATE AND REFRESH PIECHART FUNCTION
+function RefreshPieChart({data, labels}) {
+  const pieChart = document.getElementById('myPieChart');
+  
+  if (pieChart.chartInstance) {
+      pieChart.chartInstance.destroy();
+  }
+
+  const chartInstance = new Chart(pieChart, {
+      type: 'pie',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: '#',
+              data: data,
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  pieChart.chartInstance = chartInstance;
+}
+
 
 //LOAD FUNCTIONS AFTER DOM LOADED
 document.addEventListener('DOMContentLoaded', function(){
