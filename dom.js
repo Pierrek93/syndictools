@@ -46,6 +46,11 @@ function manageTableRows() {
       const rowTemplate = section.querySelector('.amount-entry-row');
       const totalAmountRow = section.querySelector('.total-amount-row');
       const newRow = rowTemplate.cloneNode(true);
+      const inputValues = newRow.querySelectorAll('.input-values');
+
+      inputValues.forEach(input => {
+        input.value = ''; 
+      });
 
       tbody.insertBefore(newRow, totalAmountRow);
       updateTotalsOnInput(financialTable);
