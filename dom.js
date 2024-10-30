@@ -27,6 +27,7 @@ function updateTotalsOnInput(table) {
       if (event.target.matches('.input-values') || event.target.matches('.description-input')) {
           updateTotals(); 
           calculateRecommendations();
+          updateTimeline();
           const {data, labels} = aggregateChartData(document.querySelectorAll('.financialTable')); 
           RefreshPieChart({data, labels}); 
       }
@@ -59,7 +60,6 @@ function manageTableRows() {
 
       tbody.insertBefore(newRow, totalAmountRow);
       updateTotalsOnInput(financialTable);
-      calculateRecommendations()
     };
 
     // DELETE ROWS FUNCTION
@@ -71,6 +71,7 @@ function manageTableRows() {
         lastRow.remove();
         updateTotalsOnInput(financialTable);
         calculateRecommendations();
+        updateTimeline();
         const {data, labels} = aggregateChartData(document.querySelectorAll('.financialTable'));
         RefreshPieChart({data, labels});
       } else {
@@ -86,7 +87,7 @@ function manageTableRows() {
   });
 }
 
-//CALCULATERECOMMENDATIONS FUNCTION
+//CALCULATE RECOMMENDATIONS FUNCTION
 function calculateRecommendations() {
   const financialTableSections = document.querySelectorAll('.section-top');
   const recommendationSection = document.querySelector('#recommendations-section');
@@ -107,8 +108,6 @@ function calculateRecommendations() {
     totalUpcomingValues.push(parseFloat(valueElements[1].textContent)) || 0;
   });
 
-  console.log(totalUpcomingValues)
-
   let workingCapitalResult = (totalUpcomingValues[0] / 12) * 5;
   let reserveFundResult = (totalUpcomingValues[0]/100) * 5;
   let annualProvisionResult = totalUpcomingValues[0];
@@ -119,7 +118,27 @@ function calculateRecommendations() {
   workingCapitalElement.textContent = workingCapitalResult.toFixed(2);
   // ExcepionalCallElement.textContent = #;
   ReserveFundCallElement.textContent = reserveFundCallResult;
+
+  return totalUpcomingValues
 }
+
+//UPDATE TIMELINE FUNCTION
+function updateTimeline() {
+  const totalUpcomingValues = calculateRecommendations();
+  const timelineSection = document.querySelector('#timeline-section')
+  const timelineItemsElements = timelineSection.querySelectorAll('.timeline-item')
+
+  let quarterlyProvisionCallResult = totalUpcomingValues[0] / 4;
+  let quarterlyReserveCallResult = totalUpcomingValues[1] / 4;
+
+  timelineItemsElements.forEach(item => {
+    const quarterlyProvisionCallElement = item.querySelector('.quarterly-provision-call')
+    const quarterlyReserveCallElement = item.querySelector('.quarterly-reserve-call')
+
+    quarterlyProvisionCallElement.textContent = quarterlyProvisionCallResult.toFixed(2);
+    quarterlyReserveCallElement.textContent = quarterlyReserveCallResult.toFixed(2);
+  });
+};
 
 // UPDATECHARTDATA FUNCTION
 function aggregateChartData(tables) {
