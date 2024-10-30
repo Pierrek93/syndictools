@@ -263,32 +263,140 @@ footer a:hover {
     position: relative; 
 }
 
-/* Common Button Styles */
-.section-top .button, /* Targeting button within section-top */
-.section-bot .button { /* Targeting button within section-bot */
-    background-color: #1f86ab; /* Primary button color */
-    color: #ffffff; /* Text color */
-    border: none; /* No border */
-    border-radius: 5px; /* Slightly rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size */
-    padding: 12px 20px; /* Padding for size */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
-    display: inline-block; /* Allows buttons to sit next to each other */
-    margin-right: 10px; /* Space between buttons */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+/* BUTTONS STYLE */
+.section-top .button, 
+.section-bot .button { 
+    background-color: #1f86ab; 
+    color: #ffffff; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    padding: 12px 20px; 
+    transition: background-color 0.3s, transform 0.3s; 
+    display: inline-block; 
+    margin-right: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
 
-/* Hover Effect */
-.section-top .button:hover, /* Targeting button hover within section-top */
-.section-bot .button:hover { /* Targeting button hover within section-bot */
-    background-color: #357ab8; /* Darker shade on hover */
-    transform: translateY(-2px); /* Slight lift effect on hover */
+.section-top .button:hover, 
+.section-bot .button:hover { 
+    background-color: #357ab8; 
+    transform: translateY(-2px); 
 }
 
-/* Active Effect */
-.section-top .button:active, /* Targeting button active within section-top */
-.section-bot .button:active { /* Targeting button active within section-bot */
-    background-color: #2e6f9c; /* Even darker shade when clicked */
-    transform: translateY(0); /* Return to original position */
+.section-top .button:active, 
+.section-bot .button:active { 
+    background-color: #2e6f9c; 
+    transform: translateY(0); 
+}
+
+/* TIMELINE */
+#timeline-section {
+    height:85%; /* Ensure the section takes full height (optional) */
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 100%; /* Adjust width as needed */
+    margin: auto;
+    padding: 0; /* Space for the line */
+    width: 100%; /* Use full width */
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly */
+    background-color: rgba(0, 128, 0, 0);
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%; /* Positioning the line */
+    left: 0;
+    right: 0;
+    height: 1.5rem; /* Thickness of the line */
+    background-color: #232323; /* Line color */
+    transform: translateY(-50%); /* Center the line vertically */
+    z-index: 0;
+}
+
+.timeline-item {
+    position: relative; /* Allow absolute positioning of child elements */
+    background-color: rgba(255, 0, 0, 0); /* Background color of the item */
+    width: 80px; /* Width of the item */
+    padding: 65px; /* Padding for inner spacing */
+    margin: 0; /* Margin between items */
+    z-index: 2; /* Ensure items are above the timeline line */
+    text-align: center; /* Center the text */
+}
+
+.timeline-dots {
+    position: absolute; /* Position relative to the timeline item */
+    background-color: #1f86ab; /* Dot color */
+    left: 0rem; /* Center horizontally within the item */
+    width: 1.5rem; /* Width of the dot */
+    height: 1.5rem; /* Height of the dot */
+    border-radius: 50%; /* Make it a circle */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Adjust to center the dot */
+    z-index: 1; /* Ensure dot is above the line */
+}
+
+.timeline-line-up {
+    position: absolute; /* Position relative to the timeline item */
+    background-color:#1f86ab; /* Line color */
+    left: 0; /* Center horizontally under the dot */
+    width: 5px; /* Width of the vertical line */
+    height: 80px; /* Adjust the height of the line */
+    top: calc(50% - 80px); /* Position above the dot */
+    transform: translateX(-50%); /* Adjust to center the line */
+    z-index: 3; /* Ensure line is behind the dot */
+}
+
+.timeline-line-down {
+    position: absolute; /* Position relative to the timeline item */
+    background-color:#1f86ab; /* Line color */
+    left: 0; /* Center horizontally under the dot */
+    width: 5px; /* Width of the vertical line */
+    height: 80px; /* Adjust the height of the line */
+    top: calc(50%); /* Position the top of the line just below the dot */
+    transform: translateX(-50%); /* Adjust to center the line */
+    z-index: 3; /* Ensure the line is behind the dot */
+}
+
+.timeline-item h4 {
+    position: absolute; /* Ensure it's positioned correctly */
+    top: calc(46%); /* Adjust top as needed */
+    left: 1rem; /* Align to the left */
+    z-index: 3; /* Ensure it's above both the timeline line and item */
+    color: #98d7ed; /* Font color */
+    margin: 0; /* Remove any default margin */
+}
+
+.timeline-item ul.ul-top {
+    position: absolute; 
+    left: 0.5rem; 
+    color: rgb(194, 194, 194); 
+    margin: 0; 
+    top: calc(15%);
+    list-style-type: none; 
+    padding: 0; 
+    white-space: nowrap; 
+}
+
+.timeline-item ul.ul-down {
+    position: absolute; 
+    left: 0.5rem; 
+    color: rgb(194, 194, 194); 
+    margin: 0; 
+    top: calc(68%);
+    list-style-type: none; 
+    padding: 0; 
+    white-space: nowrap; 
+}
+
+.timeline-item .item-span {
+    margin-left: 0; 
+    background-color: rgba(0, 128, 0, 0); 
+    padding: 2px 5px; 
+    border-radius: 5px; 
+    color: white;
 }
