@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Budgetize Co-Ownership</title>
+    <title>SyndicTools</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -84,7 +84,7 @@
 
             </div>
         
-            <div class="section-bot">
+            <!-- <div class="section-bot">
                 <h3>Provision à Budgétiser</h3>
                 <table>
                     <tr>
@@ -113,29 +113,43 @@
                         <td><span class="currency">€</span><span id="totalProvisionTrimestriel">0.00</span></td>
                     </tr>
                 </table>
-            </div>
+            </div> -->
         
             <div class="section-bot" id="recommendations-section">
                 <h3>Recommendation pour le prochain exercice:</h3>                
                 <div class="input-row">
-                    <label>Fond de roulement minimum (5/12):</label>
+                    <label>Fond de Roulement minimum (5/12):</label>
                     <div class="input-container">
                         <span class="currency">€</span>
-                        <span id="workingCapitalTotal">0.00</span>
+                        <span id="working-capital-minimum">0.00</span>
                     </div>
                 </div>
                 <div class="input-row">
-                    <label>Cotisation Fond de réserve minimum (5%):</label>
+                    <label>Cotisation Fond de Réserve minimum (5%):</label>
                     <div class="input-container">
                         <span class="currency">€</span>
-                        <span id="reserveFundTotal">0.00</span>
+                        <span id="reserve-fund-minimum">0.00</span>
                     </div>
                 </div>
                 <div class="input-row">
-                    <label>Provision trimestriel:</label>
+                    <label>Provision Annuel:</label>
                     <div class="input-container">
                         <span class="currency">€</span>
-                        <span id="provisionTotal">0.00</span>
+                        <span id="annual-provision">0.00</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label>Appel Exceptionnel:</label>
+                    <div class="input-container">
+                        <span class="currency">€</span>
+                        <span id="exceptionnal-call">0.00</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label>Appel Fond de Réserve:</label>
+                    <div class="input-container">
+                        <span class="currency">€</span>
+                        <span id="reserve-fund-call">0.00</span>
                     </div>
                 </div>
             </div>

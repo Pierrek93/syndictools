@@ -49,10 +49,13 @@ function manageTableRows() {
       const totalAmountRow = section.querySelector('.total-amount-row');
       const newRow = rowTemplate.cloneNode(true);
       const inputValues = newRow.querySelectorAll('.input-values');
+      const descriptionValue = newRow.querySelector('.description-input')
 
       inputValues.forEach(input => {
         input.value = ''; 
       });
+
+      descriptionValue.value = '';
 
       tbody.insertBefore(newRow, totalAmountRow);
       updateTotalsOnInput(financialTable);
@@ -87,28 +90,36 @@ function manageTableRows() {
 function calculateRecommendations() {
   const financialTableSections = document.querySelectorAll('.section-top');
   const recommendationSection = document.querySelector('#recommendations-section');
-  const workingCapitalElement = recommendationSection.querySelector('#workingCapitalTotal');
-  const reserveFundsElement = recommendationSection.querySelector('#reserveFundTotal');
-  const quarterlyProvisionElement = recommendationSection.querySelector('#provisionTotal');
+  const workingCapitalElement = recommendationSection.querySelector('#working-capital-minimum');
+  const reserveFundsMinimumElement = recommendationSection.querySelector('#reserve-fund-minimum');
+  const annualProvisionElement = recommendationSection.querySelector('#annual-provision');
+  // const ExcepionalCallElement = recommendationSection.querySelector('#exceptionnal-call');
+  const ReserveFundCallElement = recommendationSection.querySelector('#reserve-fund-call');
   
-  let totalUpcomingBudget = 0;
+  //totalUpcomingBudget not being used to be deleted?;
+  // let totalUpcomingBudget = 0;
+  let totalUpcomingValues = [];
 
   financialTableSections.forEach(table => {
     const valueElements = table.querySelectorAll('.amount-values');
 
-    totalUpcomingBudget += parseFloat(valueElements[1].textContent) || 0;
-  })
+    // totalUpcomingBudget += parseFloat(valueElements[1].textContent) || 0;
+    totalUpcomingValues.push(parseFloat(valueElements[1].textContent)) || 0;
+  });
 
-  let workingCapitalResult = (totalUpcomingBudget / 12) * 5;
-  let reserveFundResult = (totalUpcomingBudget/100) * 5;
-  let quarterlyProvisionResult = totalUpcomingBudget / 4;
+  console.log(totalUpcomingValues)
 
+  let workingCapitalResult = (totalUpcomingValues[0] / 12) * 5;
+  let reserveFundResult = (totalUpcomingValues[0]/100) * 5;
+  let annualProvisionResult = totalUpcomingValues[0];
+  let reserveFundCallResult = totalUpcomingValues[1];
 
-  reserveFundsElement.textContent = reserveFundResult.toFixed(2);
-  quarterlyProvisionElement.textContent = quarterlyProvisionResult.toFixed(2);
+  reserveFundsMinimumElement.textContent = reserveFundResult.toFixed(2);
+  annualProvisionElement.textContent = annualProvisionResult;
   workingCapitalElement.textContent = workingCapitalResult.toFixed(2);
+  // ExcepionalCallElement.textContent = #;
+  ReserveFundCallElement.textContent = reserveFundCallResult;
 }
-
 
 // UPDATECHARTDATA FUNCTION
 function aggregateChartData(tables) {
@@ -127,10 +138,8 @@ function aggregateChartData(tables) {
       });
   });
 
-  console.log(mergedArrayOfRealisedInputs);
   return { data: mergedArrayOfRealisedInputs, labels: mergedLabels }; 
 }
-
 
 //BARGRAPH
 // const barChart = document.getElementById('myBarChart');
@@ -189,7 +198,6 @@ function RefreshPieChart({data, labels}) {
 
   pieChart.chartInstance = chartInstance;
 }
-
 
 //LOAD FUNCTIONS AFTER DOM LOADED
 document.addEventListener('DOMContentLoaded', function(){
