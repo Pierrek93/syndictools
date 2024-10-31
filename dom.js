@@ -183,7 +183,7 @@ function RefreshBarChart({data, budget, labels}) {
       data: {
           labels: labels,
           datasets: [{
-              label: 'Exercice precedent',
+              label: 'Exercice précédent',
               data: data,
               borderWidth: 1
           },
@@ -219,7 +219,7 @@ function RefreshPieChart({data, labels}) {
       data: {
           labels: labels,
           datasets: [{
-              label: '#',
+              label: 'Exercice précédent',
               data: data,
               borderWidth: 1
           }]
@@ -234,7 +234,16 @@ function RefreshPieChart({data, labels}) {
   });
 
   pieChart.chartInstance = chartInstance;
-}
+};
+
+// PRINT BUDGET FUNCTION
+const printBudgetElement = document.querySelector('#printButton');
+
+function printBudget() {
+  window.print();
+};
+
+printBudgetElement.addEventListener('click', printBudget)
 
 //LOAD FUNCTIONS AFTER DOM LOADED
 document.addEventListener('DOMContentLoaded', function(){

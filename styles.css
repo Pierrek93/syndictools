@@ -132,7 +132,6 @@ table tr:last-child td {
     border-bottom: none;
 }
 
-
 td input[type="text"],
 td input[type="number"] {
     width: 100%;
@@ -145,7 +144,6 @@ td input[type="number"] {
     text-align: left;
 }
 
-
 .currency-input {
     display: inline-flex;
     align-items: center;
@@ -157,7 +155,6 @@ td input[type="number"] {
     font-weight: bold;
 }
 
-
 .currency-input input[type="text"] {
     width: 100%;
     padding: 8px;
@@ -167,7 +164,6 @@ td input[type="number"] {
     background-color: transparent;
     color: inherit;
 }
-
 
 .budget-layout {
     display: grid;
@@ -197,7 +193,6 @@ td input[type="number"] {
     padding-bottom: 8px;
 }
 
-
 textarea {
     width: 100%;
     height: 100px;
@@ -207,7 +202,7 @@ textarea {
     color: #333333;
 }
 
-/* CHARTS CONTAINERS */
+/* CHARTS CONTAINERS STYLE */
 .chart-container {
     background-color: #1a2d4e;
     padding: 20px;
@@ -223,7 +218,6 @@ textarea {
     margin-bottom: 10px;
     text-align: center;
 }
-
 
 footer {
     background-color: #1a2d4e;
@@ -242,7 +236,6 @@ footer a {
 footer a:hover {
     color: #b0c4de;
 }
-
 
 .recommendationSection {
     background-color: #1a2d4e;
@@ -266,7 +259,8 @@ footer a:hover {
 
 /* BUTTONS STYLE */
 .section-top .button, 
-.section-bot .button { 
+.section-bot .button,
+#printButton { 
     background-color: #1f86ab; 
     color: #ffffff; 
     border: none;
@@ -281,95 +275,102 @@ footer a:hover {
 }
 
 .section-top .button:hover, 
-.section-bot .button:hover { 
+.section-bot .button:hover,
+#printButton:hover { 
     background-color: #357ab8; 
     transform: translateY(-2px); 
 }
 
 .section-top .button:active, 
-.section-bot .button:active { 
+.section-bot .button:active,
+#printButton:active { 
     background-color: #2e6f9c; 
     transform: translateY(0); 
 }
 
-/* TIMELINE */
+#printButton {
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+/* TIMELINE STYLE */
 #timeline-section {
-    height:85%; /* Ensure the section takes full height (optional) */
+    height:85%; 
 }
 
 .timeline-container {
     position: relative;
-    max-width: 100%; /* Adjust width as needed */
+    max-width: 100%; 
     margin: auto;
-    padding: 0; /* Space for the line */
-    width: 100%; /* Use full width */
+    padding: 0; 
+    width: 100%; 
     display: flex;
-    justify-content: space-between; /* Distribute items evenly */
+    justify-content: space-between;
     background-color: rgba(0, 128, 0, 0);
 }
 
 .timeline-line {
     position: absolute;
-    top: 50%; /* Positioning the line */
+    top: 50%; 
     left: 0;
     right: 0;
-    height: 1.5rem; /* Thickness of the line */
-    background-color: #232323; /* Line color */
-    transform: translateY(-50%); /* Center the line vertically */
+    height: 1.5rem; 
+    background-color: #232323; 
+    transform: translateY(-50%); 
     z-index: 0;
 }
 
 .timeline-item {
-    position: relative; /* Allow absolute positioning of child elements */
-    background-color: rgba(255, 0, 0, 0); /* Background color of the item */
-    width: 80px; /* Width of the item */
-    padding: 65px; /* Padding for inner spacing */
-    margin: 0; /* Margin between items */
-    z-index: 2; /* Ensure items are above the timeline line */
-    text-align: center; /* Center the text */
+    position: relative; 
+    background-color: rgba(255, 0, 0, 0); 
+    width: 80px; 
+    padding: 65px; 
+    margin: 0; 
+    z-index: 2; 
+    text-align: center; 
 }
 
 .timeline-dots {
-    position: absolute; /* Position relative to the timeline item */
-    background-color: #1f86ab; /* Dot color */
-    left: 0rem; /* Center horizontally within the item */
-    width: 1.5rem; /* Width of the dot */
-    height: 1.5rem; /* Height of the dot */
-    border-radius: 50%; /* Make it a circle */
-    top: 50%; /* Center vertically */
-    transform: translate(-50%, -50%); /* Adjust to center the dot */
-    z-index: 1; /* Ensure dot is above the line */
+    position: absolute; 
+    background-color: #1f86ab; 
+    left: 0rem; 
+    width: 1.5rem; 
+    height: 1.5rem; 
+    border-radius: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1; 
 }
 
 .timeline-line-up {
-    position: absolute; /* Position relative to the timeline item */
-    background-color:#1f86ab; /* Line color */
-    left: 0; /* Center horizontally under the dot */
-    width: 5px; /* Width of the vertical line */
-    height: 80px; /* Adjust the height of the line */
-    top: calc(50% - 80px); /* Position above the dot */
-    transform: translateX(-50%); /* Adjust to center the line */
-    z-index: 3; /* Ensure line is behind the dot */
+    position: absolute; 
+    background-color:#1f86ab;
+    left: 0; 
+    width: 5px; 
+    height: 80px; 
+    top: calc(50% - 80px); 
+    transform: translateX(-50%); 
+    z-index: 3; 
 }
 
 .timeline-line-down {
-    position: absolute; /* Position relative to the timeline item */
-    background-color:#1f86ab; /* Line color */
-    left: 0; /* Center horizontally under the dot */
-    width: 5px; /* Width of the vertical line */
-    height: 80px; /* Adjust the height of the line */
-    top: calc(50%); /* Position the top of the line just below the dot */
-    transform: translateX(-50%); /* Adjust to center the line */
-    z-index: 3; /* Ensure the line is behind the dot */
+    position: absolute; 
+    background-color:#1f86ab; 
+    left: 0; 
+    width: 5px; 
+    height: 80px; 
+    top: calc(50%); 
+    transform: translateX(-50%); 
+    z-index: 3; 
 }
 
 .timeline-item h4 {
-    position: absolute; /* Ensure it's positioned correctly */
-    top: calc(46%); /* Adjust top as needed */
-    left: 1rem; /* Align to the left */
-    z-index: 3; /* Ensure it's above both the timeline line and item */
-    color: #98d7ed; /* Font color */
-    margin: 0; /* Remove any default margin */
+    position: absolute; 
+    top: calc(46%); 
+    left: 1rem; 
+    z-index: 3; 
+    color: #98d7ed; 
+    margin: 0; 
 }
 
 .timeline-item ul.ul-top {
@@ -401,3 +402,25 @@ footer a:hover {
     border-radius: 5px; 
     color: white;
 }
+
+/* PRINT BUDGET STYLE */
+@media print {
+    body {
+        background: none !important; 
+    }
+
+    header, footer, nav, #printButton, .addRow, .deleteRow {
+        display: none !important;
+    }
+
+    .section-top, .section-bot {
+        display: block;
+        margin-left: -1rem; 
+        margin-right: 1rem; 
+    }
+
+    .section-top {
+        page-break-after: always;
+    }
+}
+
