@@ -180,7 +180,7 @@ td input[type="number"] {
 
 .section-top,
 .section-bot { 
-    background-color: #203b66;
+    background-color: #1a2d4e;
     color: #ffffff;
     padding: 15px;
     border-radius: 8px;
@@ -207,14 +207,15 @@ textarea {
     color: #333333;
 }
 
-
+/* CHARTS CONTAINERS */
 .chart-container {
     background-color: #1a2d4e;
     padding: 20px;
     border-radius: 8px;
     width: 100%;
     max-width: 600px;
-    margin: 20px 0;
+    margin: 0; 
+    flex: 1; 
 }
 
 .chart-container h2 {

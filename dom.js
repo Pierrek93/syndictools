@@ -28,8 +28,9 @@ function updateTotalsOnInput(table) {
           updateTotals(); 
           calculateRecommendations();
           updateTimeline();
-          const {data, labels} = aggregateChartData(document.querySelectorAll('.financialTable')); 
+          const {data, budget, labels} = aggregateChartData(document.querySelectorAll('.financialTable')); 
           RefreshPieChart({data, labels}); 
+          RefreshBarChart({data, budget, labels});
       }
   });
 }
@@ -74,6 +75,7 @@ function manageTableRows() {
         updateTimeline();
         const {data, labels} = aggregateChartData(document.querySelectorAll('.financialTable'));
         RefreshPieChart({data, labels});
+        RefreshBarChart({data, budget, labels});
       } else {
         alert('Cannot delete the last row.');
       }
@@ -143,6 +145,7 @@ function updateTimeline() {
 // UPDATECHARTDATA FUNCTION
 function aggregateChartData(tables) {
   let mergedArrayOfRealisedInputs = [];
+  let mergedArrayOfBudgetInputs = [];
   let mergedLabels = [];
 
   tables.forEach(table => {
@@ -151,42 +154,57 @@ function aggregateChartData(tables) {
       amountEntryRows.forEach(row => {
           const inputValues = row.querySelectorAll('.input-values');
           const realisedValue = parseFloat(inputValues[0].value) || 0;
-          mergedArrayOfRealisedInputs.push(realisedValue);
+          const budgetValue = parseFloat(inputValues[1].value) || 0;
           const label = row.querySelector('.description-input')?.value || `Item ${mergedLabels.length + 1}`;
+
+          mergedArrayOfRealisedInputs.push(realisedValue);
+          mergedArrayOfBudgetInputs.push(budgetValue);
           mergedLabels.push(label);
       });
   });
 
-  return { data: mergedArrayOfRealisedInputs, labels: mergedLabels }; 
+  let data = mergedArrayOfRealisedInputs;
+  let budget = mergedArrayOfBudgetInputs;
+  let labels = mergedLabels;
+
+  return {data, budget, labels}; 
 }
 
 //BARGRAPH
-// const barChart = document.getElementById('myBarChart');
-// new Chart(barChart, {
-//   type: 'bar',
-//   data: {
-//     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//     datasets: [
-//       {
-//       label: '2021 sales',
-//       data: [120, 180, 130, 260],
-//       borderWidth: 1
-//       },
-//       {
-//         label: '2022 Sales',
-//         data: [120, 180, 130, 260],
-//         borderWidth: 2
-//     },
-//   ]
-//   },
-//   options: {
-//     scales: {
-//       y: {
-//         beginAtZero: true,
-//       }
-//     }
-//   }
-// });
+function RefreshBarChart({data, budget, labels}) {
+  const barChart = document.getElementById('myBarChart');
+  
+  if (barChart.chartInstance) {
+      barChart.chartInstance.destroy();
+  }
+
+  const chartInstance = new Chart(barChart, {
+      type: 'bar',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Exercice precedent',
+              data: data,
+              borderWidth: 1
+          },
+          {
+            label: 'Exercice suivant',
+            data: budget,
+            borderWidth: 1
+          }]
+      },
+      
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  barChart.chartInstance = chartInstance;
+}
 
 //CREATE AND REFRESH PIECHART FUNCTION
 function RefreshPieChart({data, labels}) {
