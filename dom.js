@@ -35,7 +35,7 @@ function updateTotalsOnInput(table) {
   });
 }
 
-// MANAGE TABLES ROWS FUNCTION
+//MANAGE TABLES ROWS FUNCTION
 function manageTableRows() {
   const financialTableSections = document.querySelectorAll('.section-top');
 
@@ -96,33 +96,38 @@ function calculateRecommendations() {
   const workingCapitalElement = recommendationSection.querySelector('#working-capital-minimum');
   const reserveFundsMinimumElement = recommendationSection.querySelector('#reserve-fund-minimum');
   const annualProvisionElement = recommendationSection.querySelector('#annual-provision');
-  // const ExcepionalCallElement = recommendationSection.querySelector('#exceptionnal-call');
-  const ReserveFundCallElement = recommendationSection.querySelector('#reserve-fund-call');
+  const exceptionalCallElement = recommendationSection.querySelector('#dynamic-input');
+  const reserveFundCallElement = recommendationSection.querySelector('#reserve-fund-call');
   
-  //totalUpcomingBudget not being used to be deleted?;
-  // let totalUpcomingBudget = 0;
   let totalUpcomingValues = [];
 
   financialTableSections.forEach(table => {
     const valueElements = table.querySelectorAll('.amount-values');
 
-    // totalUpcomingBudget += parseFloat(valueElements[1].textContent) || 0;
-    totalUpcomingValues.push(parseFloat(valueElements[1].textContent)) || 0;
+    totalUpcomingValues.push(parseFloat(valueElements[1].textContent)) || 0.00;
   });
 
   let workingCapitalResult = (totalUpcomingValues[0] / 12) * 5;
   let reserveFundResult = (totalUpcomingValues[0]/100) * 5;
   let annualProvisionResult = totalUpcomingValues[0];
-  let reserveFundCallResult = totalUpcomingValues[1];
+  let exceptionalCallResult = parseFloat(exceptionalCallElement.textContent) || 0.00;
+  let reserveFundCallResult = totalUpcomingValues[1] - exceptionalCallResult || 0.00;
+  console.log('Hello World', reserveFundCallResult, typeof(reserveFundCallResult), exceptionalCallResult, typeof(exceptionalCallResult));  
 
   reserveFundsMinimumElement.textContent = reserveFundResult.toFixed(2);
-  annualProvisionElement.textContent = annualProvisionResult;
+  annualProvisionElement.textContent = annualProvisionResult.toFixed(2);
   workingCapitalElement.textContent = workingCapitalResult.toFixed(2);
-  // ExcepionalCallElement.textContent = #;
-  ReserveFundCallElement.textContent = reserveFundCallResult;
+  reserveFundCallElement.textContent = reserveFundCallResult.toFixed(2);
+  
+  return [... totalUpcomingValues, exceptionalCallResult]
+};
 
-  return totalUpcomingValues
-}
+// EVENT LISTENER FOR EXCEPTIONAL CALL
+const exceptionalCallElement = document.querySelector('#dynamic-input');
+exceptionalCallElement.addEventListener('input', () => {
+  calculateRecommendations();
+  updateTimeline();
+});
 
 //UPDATE TIMELINE FUNCTION
 function updateTimeline() {
@@ -130,8 +135,10 @@ function updateTimeline() {
   const timelineSection = document.querySelector('#timeline-section')
   const timelineItemsElements = timelineSection.querySelectorAll('.timeline-item')
 
+  console.log('res=',totalUpcomingValues)
+
   let quarterlyProvisionCallResult = totalUpcomingValues[0] / 4;
-  let quarterlyReserveCallResult = totalUpcomingValues[1] / 4;
+  let quarterlyReserveCallResult = (totalUpcomingValues[1] - totalUpcomingValues[2]) / 4;
 
   timelineItemsElements.forEach(item => {
     const quarterlyProvisionCallElement = item.querySelector('.quarterly-provision-call')
@@ -142,7 +149,7 @@ function updateTimeline() {
   });
 };
 
-// UPDATECHARTDATA FUNCTION
+//UPDATECHARTDATA FUNCTION
 function aggregateChartData(tables) {
   let mergedArrayOfRealisedInputs = [];
   let mergedArrayOfBudgetInputs = [];
@@ -238,11 +245,9 @@ function RefreshPieChart({data, labels}) {
 
 // PRINT BUDGET FUNCTION
 const printBudgetElement = document.querySelector('#printButton');
-
 function printBudget() {
   window.print();
 };
-
 printBudgetElement.addEventListener('click', printBudget)
 
 //LOAD FUNCTIONS AFTER DOM LOADED

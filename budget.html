@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SyndicTools</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="main.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -13,16 +13,16 @@
         <h1>Budget Indicatif</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="coproprietes.html">Mes Copropriétés</a></li>
                 <li><a href="budget.html">Budget</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="progress.html">Progress</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <!-- <li><a href="#about">About</a></li> -->
+                <!-- <li><a href="progress.html">Progress</a></li> -->
+                <!-- <li><a href="contact.html">Contact</a></li> -->
             </ul>
         </nav>
     </header>
 
-    <button id="printButton">Print Budget to PDF</button>
+    <button id="printButton">Imprimer le budget en PDF</button>
 
     <main id="mainContent">
         <div class="budget-layout">
@@ -110,7 +110,7 @@
                     <label>Appel Exceptionnel:</label>
                     <div class="input-container">
                         <span class="currency">€</span>
-                        <span id="exceptionnal-call">0.00</span>
+                        <div id="dynamic-input" class="form-control" contenteditable="true" placeholder="0.00"></div>
                     </div>
                 </div>
                 <div class="input-row">

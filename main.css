@@ -6,6 +6,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-image: url('images/bg.jpg');
     background-size: cover; 
     background-position: center; 
@@ -44,6 +47,7 @@ header nav ul li a:hover {
 }
 
 main {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -144,6 +148,32 @@ td input[type="number"] {
     text-align: left;
 }
 
+#dynamic-input {
+    display: inline-block;
+    min-width: 2rem;
+    padding: 0.5rem; 
+    border-bottom: solid;
+    border-color: gray;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    transition: min-width 0.2s ease;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+#dynamic-input.placeholder{
+    color: white;
+}
+
+#dynamic-input:empty:before {
+    content: attr(placeholder); /* Show placeholder text */
+    color: #ffffff;
+}
+
+#dynamic-input:focus {
+    min-width: 10ch; /* Allow expansion on focus */
+}
+
 .currency-input {
     display: inline-flex;
     align-items: center;
@@ -219,24 +249,6 @@ textarea {
     text-align: center;
 }
 
-footer {
-    background-color: #1a2d4e;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 14px;
-}
-
-footer a {
-    color: #8eaecd;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-footer a:hover {
-    color: #b0c4de;
-}
-
 .recommendationSection {
     background-color: #1a2d4e;
     padding: 20px;
@@ -291,6 +303,8 @@ footer a:hover {
 #printButton {
     margin-top: 0.25rem;
     margin-left: 0.25rem;
+    max-width: 10rem; /* Set a max width */
+    align-self: left; /* Center the button in its container */
 }
 
 /* TIMELINE STYLE */
@@ -424,3 +438,21 @@ footer a:hover {
     }
 }
 
+/* FOOTER STYLE */
+footer {
+    background-color: #1a2d4e;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #8eaecd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #b0c4de;
+}
