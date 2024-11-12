@@ -148,7 +148,7 @@ td input[type="number"] {
     text-align: left;
 }
 
-#dynamic-input {
+.dynamic-input {
     display: inline-block;
     min-width: 2rem;
     padding: 0.5rem; 
@@ -161,16 +161,16 @@ td input[type="number"] {
     white-space: nowrap; /* Prevent wrapping */
 }
 
-#dynamic-input.placeholder{
+.dynamic-input.placeholder{
     color: white;
 }
 
-#dynamic-input:empty:before {
+.dynamic-input:empty:before {
     content: attr(placeholder); /* Show placeholder text */
     color: #ffffff;
 }
 
-#dynamic-input:focus {
+.dynamic-input:focus {
     min-width: 10ch; /* Allow expansion on focus */
 }
 
@@ -316,7 +316,7 @@ textarea {
     position: relative;
     max-width: 100%; 
     margin: auto;
-    padding: 0; 
+    padding: 0 1rem; 
     width: 100%; 
     display: flex;
     justify-content: space-between;

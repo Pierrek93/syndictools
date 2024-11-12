@@ -99,7 +99,7 @@ function calculateRecommendations() {
   const workingCapitalElement = recommendationSection.querySelector('#working-capital-minimum');
   const reserveFundsMinimumElement = recommendationSection.querySelector('#reserve-fund-minimum');
   const annualProvisionElement = recommendationSection.querySelector('#annual-provision');
-  const exceptionalCallElement = recommendationSection.querySelector('#dynamic-input');
+  const exceptionalCallElement = recommendationSection.querySelector('#exceptional-call');
   const reserveFundCallElement = recommendationSection.querySelector('#reserve-fund-call');
   
   let totalUpcomingValues = [];
@@ -114,22 +114,26 @@ function calculateRecommendations() {
   let reserveFundResult = (totalUpcomingValues[0]/100) * 5;
   let annualProvisionResult = totalUpcomingValues[0];
   let exceptionalCallResult = parseFloat(exceptionalCallElement.textContent) || 0.00;
-  let reserveFundCallResult = totalUpcomingValues[1] - exceptionalCallResult || 0.00;
+  let reserveFundCallResult = parseFloat(reserveFundCallElement.textContent) || 0.00;
 
   reserveFundsMinimumElement.textContent = reserveFundResult.toFixed(2);
   annualProvisionElement.textContent = annualProvisionResult.toFixed(2);
   workingCapitalElement.textContent = workingCapitalResult.toFixed(2);
-  reserveFundCallElement.textContent = reserveFundCallResult.toFixed(2);
   
-  return [... totalUpcomingValues, exceptionalCallResult]
+  return [... totalUpcomingValues, exceptionalCallResult, reserveFundCallResult]
 };
 
-// EVENT LISTENER FOR EXCEPTIONAL CALL
-const exceptionalCallElement = document.querySelector('#dynamic-input');
-exceptionalCallElement.addEventListener('input', () => {
+// EVENT LISTENER FOR DYNAMIC-INPUTS
+const exceptionalCallElement = document.querySelector('#exceptional-call');
+const reserveFundCallElement = document.querySelector('#reserve-fund-call');
+
+const handleInputChange = () => {
   calculateRecommendations();
   updateTimeline();
-});
+};
+
+exceptionalCallElement.addEventListener('input', handleInputChange);
+reserveFundCallElement.addEventListener('input', handleInputChange);
 
 //UPDATE TIMELINE FUNCTION
 function updateTimeline() {
@@ -138,7 +142,7 @@ function updateTimeline() {
   const timelineItemsElements = timelineSection.querySelectorAll('.timeline-item')
 
   let quarterlyProvisionCallResult = totalUpcomingValues[0] / 4;
-  let quarterlyReserveCallResult = (totalUpcomingValues[1] - totalUpcomingValues[2]) / 4;
+  let quarterlyReserveCallResult = (totalUpcomingValues[3]) / 4;
 
   timelineItemsElements.forEach(item => {
     const quarterlyProvisionCallElement = item.querySelector('.quarterly-provision-call')
