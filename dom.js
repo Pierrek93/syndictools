@@ -2,7 +2,9 @@
 function updateTotalsOnInput(table) {
     const amountEntryRows = table.querySelectorAll('.amount-entry-row');
     const displayedTotals = table.querySelectorAll('.amount-values');
+    const tbody = table.querySelector('tbody')
 
+    // UPDATE TOTALS
     const updateTotals = () => {
       let totalRealised = 0; 
       let totalBudget = 0;
@@ -21,8 +23,7 @@ function updateTotalsOnInput(table) {
     };
 
     updateTotals();
-
-    const tbody = table.querySelector('tbody')
+ 
     tbody.addEventListener('input', (event) => {
       if (event.target.matches('.input-values') || event.target.matches('.description-input')) {
           updateTotals(); 
@@ -32,7 +33,9 @@ function updateTotalsOnInput(table) {
           RefreshPieChart({data, labels}); 
           RefreshBarChart({data, budget, labels});
       }
-  });
+    });
+
+    selfCalc(updateTotals);
 }
 
 //MANAGE TABLES ROWS FUNCTION
@@ -112,7 +115,6 @@ function calculateRecommendations() {
   let annualProvisionResult = totalUpcomingValues[0];
   let exceptionalCallResult = parseFloat(exceptionalCallElement.textContent) || 0.00;
   let reserveFundCallResult = totalUpcomingValues[1] - exceptionalCallResult || 0.00;
-  console.log('Hello World', reserveFundCallResult, typeof(reserveFundCallResult), exceptionalCallResult, typeof(exceptionalCallResult));  
 
   reserveFundsMinimumElement.textContent = reserveFundResult.toFixed(2);
   annualProvisionElement.textContent = annualProvisionResult.toFixed(2);
@@ -134,8 +136,6 @@ function updateTimeline() {
   const totalUpcomingValues = calculateRecommendations();
   const timelineSection = document.querySelector('#timeline-section')
   const timelineItemsElements = timelineSection.querySelectorAll('.timeline-item')
-
-  console.log('res=',totalUpcomingValues)
 
   let quarterlyProvisionCallResult = totalUpcomingValues[0] / 4;
   let quarterlyReserveCallResult = (totalUpcomingValues[1] - totalUpcomingValues[2]) / 4;
@@ -250,7 +250,42 @@ function printBudget() {
 };
 printBudgetElement.addEventListener('click', printBudget)
 
+// SELF CALC FUNCTION
+function selfCalc(updateTotalsCB) {
+  const tbodies = document.querySelectorAll('tbody');
+  let sumOf = 0; 
+
+  tbodies.forEach(tbody => {
+    tbody.addEventListener('input', (event) => {
+      const inputValue = event.target.value;
+      
+      if (inputValue) {
+        try {
+          sumOf = Function('return ' + inputValue)(); 
+        } catch (error) {
+          console.log('Invalid input, unable to calculate.');
+        }
+      }
+    });
+  
+    tbody.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && event.target.tagName === 'INPUT') {
+        event.target.value = sumOf.toFixed(2); 
+        if (updateTotalsCB) updateTotalsCB();
+        calculateRecommendations();
+        updateTimeline(); 
+        const { data, budget, labels } = aggregateChartData(document.querySelectorAll('.financialTable'));
+        RefreshPieChart({ data, labels });
+        RefreshBarChart({ data, budget, labels });
+      }
+    });
+
+  })
+}
+
+
 //LOAD FUNCTIONS AFTER DOM LOADED
 document.addEventListener('DOMContentLoaded', function(){
   manageTableRows();
+  selfCalc();
 });
