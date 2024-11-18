@@ -6,13 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Budgetize Co-Ownership - Text Page</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <header>
         <h1>Home</h1>
         <nav>
             <ul>
-                <li><a href="coproprietes.html">Mes Copropriétés</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="budget.html">Budget</a></li>
                 <!-- <li><a href="#about">About</a></li>
                 <li><a href="progress.html">Progress</a></li>
@@ -21,14 +22,74 @@
         </nav>
     </header>
 
-    <main id="mainContent">
-        <section class="text-section">
-            <p>Hello World</p>
+    <main id="main-content">
+        <section class="main-section">
+            <nav class="navigation-list">
+                <ul>
+                    <li id="create-building-nav">Creation building</li>
+                    <li id="intervention-nav">Intervention</li>
+                    <li id="follow-up-nav">Suivi</li>
+                    <li id="information-nav">information building</li>
+                    <li id="syndicat-nav">Conseil de Copropriete</li>
+                </ul>
+            </nav>
+
+            <div class="display-section"> 
+                    
+                <div id="create-building-section" style = 'display: none'>
+                    <div class="user-input-cell" id="input-name"><span>Name: </span><input type="text"/></div>
+                    <div class="user-input-cell" id="input-bce"><span>BCE: </span><input type="text"/></div>
+                    <div class="user-input-cell" id="input-adress"><span>Adress: </span><input type="text"/></div>
+                    <div class="user-input-cell" id="input-postal-code"><span>Postal Code: </span><input type="text"/></div>
+                    <div class="user-input-cell" id="input-city"><span>City: </span><input type="text"></div>
+                    <div class="user-input-cell" id="input-lot"><span>Lots: </span><input type="text"/></div>
+                    <div class="user-input-cell" id="input-fees"><span>Honoraires:  </span><input type="text"/></div>   
+                    <button id="create-property-btn">Update Excel</button>
+                </div>
+
+                <div id="intervention-section">
+                        <!-- to do -->
+                </div>
+                
+                <div id="follow-up-section">
+                        <!-- to do -->
+                </div>
+                
+                <div id="information-section">
+                        <p>Compteur Gaz: <span>123123</span></p>
+                        <p>Nombre d'ascenseur: <span>123123</span></p>
+                        <p>Installation ascenseur: <span>123123</span></p>
+                        <p>Nombre d'exctincteur: <span>123123</span></p>
+                        <p>Nombre de Devidoirs: <span>123123</span></p>
+                        <p>Code Chaufferie: <span>123123</span></p>
+                        <p>Installation Chaudiere: <span>123123</span></p>
+                        <p>monte-charge: <span>123123</span></p>
+                        <p>Nombre d'etage: <span>123123</span></p>
+                        <p>Installation porte parking: <span>123123</span></p>  
+                </div>
+
+                <div id="syndicat-section" style = 'display: none'>
+                    <div class="display-syndicat">
+                        <span>CC num 1</span>
+                        <span>CC num 2</span>
+                        <span>CC num 3</span>
+                        <span>CC num 4</span>
+                    </div>
+                    
+                    <input class="add-syndicat"/>
+                    <button class="#" id="#">+</button><button id="#">-</button>
+                </div>
+
+            </div>
+
+
         </section>
     </main>
 
     <footer>
         <li>Design: <a href="https://pierrek93.github.io/Personal-webpage/#" target="blank">Pierre Keane</a></li>
     </footer>
+
+    <script src="dashboard.js"></script>
 </body>
 </html>

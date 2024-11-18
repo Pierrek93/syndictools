@@ -1,0 +1,124 @@
+/* DASHBOARD CSS */
+
+.main-section {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+} 
+
+/* NAVIGATION SECTION CSS*/
+.navigation-list {
+    width: 250px;
+    background-color: #abcdef;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.navigation-list ul {
+    list-style: none;
+}
+
+.navigation-list li {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.navigation-list li:hover {
+    background-color: #e9ecef;
+    color: #1a73e8;
+}
+
+/* CREATE BUILDING CSS */
+#create-building-section {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: green;
+}
+
+.user-input-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.user-input-cell span {
+    min-width: 120px;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.user-input-cell input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+.user-input-cell input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
+}
+
+#create-property-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.2s ease;
+}
+
+#create-property-btn:hover {
+    background-color: #1557b0;
+}
+
+/* SYNDICAT CSS */
+#syndicat-section {
+    background-color: red;
+    padding:2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-section {
+        flex-direction: column;
+    }
+
+    .navigation-list {
+        width: 100%;
+    }
+
+    .user-input-cell {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .user-input-cell span {
+        min-width: auto;
+    }
+
+    .user-input-cell input {
+        width: 100%;
+    }
+}
