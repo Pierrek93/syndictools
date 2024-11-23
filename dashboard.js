@@ -28,9 +28,28 @@ function switchSection() {
       }
     });
   }
-    
+
+async function fetchBuildings() {
+  try {
+    console.log("Fetching buildings...");
+    const response = await fetch("http://localhost:3000/buildings");
+    console.log("Response:", response);
+    const buildings = await response.json();
+    console.log("Buildings:", buildings);
+    displayBuildings(buildings);
+  } catch (error) {
+    console.error("Error fetching buildings:", error);
+  }
+}
+
+
+function displayBuildings(buildings) {
+  console.log(`succesfully fetched`)
+}
+
   // LOAD FUNCTIONS AFTER DOM LOADED
   document.addEventListener('DOMContentLoaded', function () {
     switchSection(); 
+    fetchBuildings();
   });
   
