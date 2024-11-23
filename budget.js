@@ -102,16 +102,18 @@ function calculateRecommendations() {
   const exceptionalCallElement = recommendationSection.querySelector('#exceptional-call');
   const reserveFundCallElement = recommendationSection.querySelector('#reserve-fund-call');
   
+  let totalPastValues = [];
   let totalUpcomingValues = [];
 
   financialTableSections.forEach(table => {
     const valueElements = table.querySelectorAll('.amount-values');
 
+    totalPastValues.push(parseFloat(valueElements[0].textContent)) || 0.00;
     totalUpcomingValues.push(parseFloat(valueElements[1].textContent)) || 0.00;
   });
 
   let workingCapitalResult = (totalUpcomingValues[0] / 12) * 5;
-  let reserveFundResult = (totalUpcomingValues[0]/100) * 5;
+  let reserveFundResult = (totalPastValues[0]/100) * 5;
   let annualProvisionResult = totalUpcomingValues[0];
   let exceptionalCallResult = parseFloat(exceptionalCallElement.textContent) || 0.00;
   let reserveFundCallResult = parseFloat(reserveFundCallElement.textContent) || 0.00;
