@@ -29,27 +29,44 @@ function switchSection() {
     });
   }
 
-async function fetchBuildings() {
+
+// LISTING BUILDINGS
+const listBuildingsButtonElement = document.getElementById('list-buildings-btn');
+
+async function listBuildings() {
+  const tableBody = document.querySelector('#buildings-table tbody');
+  tableBody.innerHTML = ''; // Clear any existing rows in the table body
+  console.log('Fetching buildings...');
+
   try {
-    console.log("Fetching buildings...");
     const response = await fetch("http://localhost:3000/buildings");
-    console.log("Response:", response);
     const buildings = await response.json();
-    console.log("Buildings:", buildings);
-    displayBuildings(buildings);
+
+    buildings.forEach(eachBuilding => {
+      console.log(`Each building:`, eachBuilding);
+
+      // Create a new table row
+      const row = document.createElement('tr');
+
+      // Populate the row with data
+      Object.values(eachBuilding).forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+
+      // Append the row to the table body
+      tableBody.appendChild(row);
+    });
   } catch (error) {
     console.error("Error fetching buildings:", error);
   }
 }
 
-
-function displayBuildings(buildings) {
-  console.log(`succesfully fetched`)
-}
+listBuildingsButtonElement.addEventListener('click', listBuildings)
 
   // LOAD FUNCTIONS AFTER DOM LOADED
   document.addEventListener('DOMContentLoaded', function () {
     switchSection(); 
-    fetchBuildings();
   });
   

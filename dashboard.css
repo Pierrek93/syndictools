@@ -47,7 +47,7 @@
     background-color: green;
 }
 
-.user-input-cell {
+/* .user-input-cell {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -73,7 +73,7 @@
     outline: none;
     border-color: #1a73e8;
     box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
-}
+} */
 
 #create-property-btn {
     margin-top: 1rem;
@@ -108,7 +108,7 @@
         width: 100%;
     }
 
-    .user-input-cell {
+    /* .user-input-cell {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
@@ -120,5 +120,5 @@
 
     .user-input-cell input {
         width: 100%;
-    }
+    } */
 }
