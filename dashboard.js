@@ -65,6 +65,50 @@ async function listBuildings() {
 
 listBuildingsButtonElement.addEventListener('click', listBuildings)
 
+//CREATE BUILDING FRONTEND
+function createBuilding() {
+  console.log("createBuilding function called");
+  const formElement = document.getElementById('add-building-form');
+  const inputElements = formElement.querySelectorAll('input');
+  const newCreatedBuilding = {id: '#', name: '#', bce: '#', adress: '#'};
+  
+  // Map input element ids to property names
+  const propertyMap = {
+    'building-id': 'id',
+    'building-name': 'name',
+    'building-bce': 'bce',
+    'building-adress': 'adress'
+  };
+
+  inputElements.forEach(element => {
+    const property = propertyMap[element.id];
+    if (property) {
+      newCreatedBuilding[property] = element.value;
+    } else {
+      console.log('Error: Unknown input element');
+    }
+  });
+
+  console.log(newCreatedBuilding)
+
+  // Send data to backend via POST request
+  fetch('http://localhost:3000/buildings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newCreatedBuilding)  // Convert newCreatedBuilding to JSON
+  })
+  .then(response => response.json())  // Parse the response as JSON
+  .then(data => {
+    console.log('Building added successfully:', data);
+  })
+  .catch(error => {
+    console.error('Error adding building:', error);
+  });
+}
+
+
   // LOAD FUNCTIONS AFTER DOM LOADED
   document.addEventListener('DOMContentLoaded', function () {
     switchSection(); 

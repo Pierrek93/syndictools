@@ -8,8 +8,4 @@ let database = {
     ]
 };
 
-function getBuildings() {
-    return database.buildings;
-}
-
-module.exports = { getBuildings};
+module.exports = database;

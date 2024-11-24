@@ -1,2 +1,2 @@
 # Budgetize
- This is my website to make budget for co-ownerships
+ This website provides tools to simplify and streamline co-ownership management.
