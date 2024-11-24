@@ -71,24 +71,6 @@ app.post("/buildings", (req, res) => {
   });
 });
 
- // Test Function to Simulate Posting Data
-//  function testPostBuilding() {
-//    console.log("Testing POST /buildings...");
- 
-//    axios.post('http://localhost:3000/buildings', {
-//     id: "3",
-//     name: "Test Building",
-//     bce: "999.123.456",
-//     adress: "testingstreet"
-//    })
-//    .then(response => {
-//      console.log("Test POST successful:", response.data);
-//    })
-//    .catch(error => {
-//      console.error("Test POST failed:", error.message);
-//    });
-//  }
-
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

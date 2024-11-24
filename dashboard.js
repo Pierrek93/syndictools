@@ -66,13 +66,13 @@ async function listBuildings() {
 listBuildingsButtonElement.addEventListener('click', listBuildings)
 
 //CREATE BUILDING FRONTEND
-function createBuilding() {
-  console.log("createBuilding function called");
+const createBuildingsButtonElement = document.getElementById('create-buildings-btn');
+
+async function createBuilding() {
   const formElement = document.getElementById('add-building-form');
   const inputElements = formElement.querySelectorAll('input');
-  const newCreatedBuilding = {id: '#', name: '#', bce: '#', adress: '#'};
-  
-  // Map input element ids to property names
+  const newCreatedBuilding = { id: '#', name: '#', bce: '#', adress: '#' };
+
   const propertyMap = {
     'building-id': 'id',
     'building-name': 'name',
@@ -89,25 +89,30 @@ function createBuilding() {
     }
   });
 
-  console.log(newCreatedBuilding)
+  console.log(newCreatedBuilding);
 
-  // Send data to backend via POST request
-  fetch('http://localhost:3000/buildings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newCreatedBuilding)  // Convert newCreatedBuilding to JSON
-  })
-  .then(response => response.json())  // Parse the response as JSON
-  .then(data => {
+  try {
+    const response = await fetch('http://localhost:3000/buildings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCreatedBuilding) 
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
     console.log('Building added successfully:', data);
-  })
-  .catch(error => {
+
+  } catch (error) {
     console.error('Error adding building:', error);
-  });
+  }
 }
 
+createBuildingsButtonElement.addEventListener('click', createBuilding)
 
   // LOAD FUNCTIONS AFTER DOM LOADED
   document.addEventListener('DOMContentLoaded', function () {
