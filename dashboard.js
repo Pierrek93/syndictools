@@ -71,10 +71,9 @@ const createBuildingsButtonElement = document.getElementById('create-buildings-b
 async function createBuilding() {
   const formElement = document.getElementById('add-building-form');
   const inputElements = formElement.querySelectorAll('input');
-  const newCreatedBuilding = { id: '#', name: '#', bce: '#', adress: '#' };
+  const newCreatedBuilding = { name: '#', bce: '#', adress: '#' };
 
   const propertyMap = {
-    'building-id': 'id',
     'building-name': 'name',
     'building-bce': 'bce',
     'building-adress': 'adress'
@@ -113,6 +112,39 @@ async function createBuilding() {
 }
 
 createBuildingsButtonElement.addEventListener('click', createBuilding)
+
+// DELETE BUILDING FUNCTION
+const deleteBuildingButtonEle = document.getElementById('delete-building-btn');
+
+async function deleteSelectedBuilding() {
+const deleteFollowUpElement = document.getElementById('delete-follow-up')
+const deleteBuildingNameEle = deleteFollowUpElement.querySelector('#delete-building-name')
+const deleteBuildingBceEle = deleteFollowUpElement.querySelector('#delete-building-bce')
+
+const deleteThisBuilding = { name: deleteBuildingNameEle.value, bce: deleteBuildingBceEle.value};
+
+  try {
+    const response = await fetch('http://localhost:3000/buildings', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(deleteThisBuilding) 
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Building deleted successfully:', data);
+
+  } catch (error) {
+    console.error('Error deleting building:', error);
+  }
+};
+
+deleteBuildingButtonEle.addEventListener('click', deleteSelectedBuilding);
 
   // LOAD FUNCTIONS AFTER DOM LOADED
   document.addEventListener('DOMContentLoaded', function () {

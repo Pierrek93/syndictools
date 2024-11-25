@@ -17,7 +17,6 @@ const connection = mysql.createConnection({
   database: confidentialInfo.database 
 });
 
-// Connect to the MySQL server
 connection.connect(err => {
   if (err) {
     console.error('Error connecting to MySQL:', err.stack);
@@ -26,36 +25,30 @@ connection.connect(err => {
   console.log('Connected to MySQL as id ' + connection.threadId);
 });
 
-// Enable CORS for specific origin (your frontend)
 app.use(cors({ origin: "http://127.0.0.1:5500" }));
-
-// Parse JSON requests
 app.use(express.json());
 
 // Endpoint to fetch data from the 'buildings' table
 app.get('/buildings', (req, res) => {
-  // SQL query to fetch all buildings from the database
   connection.query('SELECT * FROM buildings', (err, results) => {
     if (err) {
       res.status(500).json({ error: 'Database query failed' });
       return;
     }
-    res.json(results); // Send the results back to the client
+    res.json(results);
   });
 });
 
 // Endpoint to post buildings to the database
 app.post("/buildings", (req, res) => {
-  console.log("POST /buildings request received");
+  console.log(`POST /buildings request received`);
 
-  const newBuilding = req.body;  // Get the building data from the request body
+  const newBuilding = req.body; 
   console.log("New building data:", newBuilding);
 
-  // SQL query to insert a new building into the 'buildings' table
-  const query = 'INSERT INTO buildings (id, name, bce, adress) VALUES (?, ?, ?, ?)';
-  const params = [newBuilding.id, newBuilding.name, newBuilding.bce, newBuilding.adress];
+  const query = 'INSERT INTO buildings (name, bce, adress) VALUES (?, ?, ?)';
+  const params = [newBuilding.name, newBuilding.bce, newBuilding.adress];
 
-  // Execute the query
   connection.query(query, params, (err, results) => {
     if (err) {
       console.error('Error inserting building:', err);
@@ -63,15 +56,44 @@ app.post("/buildings", (req, res) => {
       return;
     }
 
-    // Send back a response with the new building data and auto-generated ID
     res.status(201).json({
       message: 'Building added successfully',
-      building: { id: newBuilding.id, ...newBuilding } // Return the new building data
+      building: {
+        // id: newBuilding.id, 
+        name: newBuilding.name, 
+        bce: newBuilding.bce, 
+        adress: newBuilding.adress
+      } 
     });
   });
 });
 
-// Start the server
+// Endpoint to delete a building
+app.delete('/buildings', (req, res) => {
+  console.log(`DELETE /building request received`);
+
+  const toBeDeletedBuilding = req.body;
+  console.log("to be deleted building:", toBeDeletedBuilding);
+
+  const query = `DELETE FROM buildings WHERE name = ? AND bce = ?;`;
+  const params = [toBeDeletedBuilding.name, toBeDeletedBuilding.bce];
+
+  connection.query(query, params, (err, results) => {
+    if (err) {
+      console.error('Error deleting building:', err);
+      res.status(500).json({ error: 'Failed to delete building from database' });
+      return;
+    }
+
+    if (results.affectedRows === 0) {
+      res.status(404).json({ message: 'Building not found' });
+    } else {
+      res.status(200).json({ message: 'Building deleted successfully' });
+    }
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
