@@ -3,13 +3,11 @@ console.log('Server.js is successfully loaded');
 const express = require("express");
 const mysql = require('mysql2');
 const cors = require("cors");
-const axios = require('axios');
 const confidentialInfo = require('./confidential');
 
 const app = express();
 const PORT = 3000;
 
-// Create a connection to the MySQL database
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -29,8 +27,8 @@ app.use(cors({ origin: "http://127.0.0.1:5500" }));
 app.use(express.json());
 
 // Endpoint to fetch data from the 'buildings' table
-app.get('/buildings', (req, res) => {
-  connection.query('SELECT * FROM buildings', (err, results) => {
+app.get('/buildings_info', (req, res) => {
+  connection.query('SELECT * FROM buildings_info', (err, results) => {
     if (err) {
       res.status(500).json({ error: 'Database query failed' });
       return;
@@ -40,13 +38,13 @@ app.get('/buildings', (req, res) => {
 });
 
 // Endpoint to post buildings to the database
-app.post("/buildings", (req, res) => {
-  console.log(`POST /buildings request received`);
+app.post("/buildings_info", (req, res) => {
+  console.log(`POST /buildings_info request received`);
 
   const newBuilding = req.body; 
   console.log("New building data:", newBuilding);
 
-  const query = 'INSERT INTO buildings (name, bce, adress) VALUES (?, ?, ?)';
+  const query = 'INSERT INTO buildings_info (building_name, building_bce, building_adress) VALUES (?, ?, ?)';
   const params = [newBuilding.name, newBuilding.bce, newBuilding.adress];
 
   connection.query(query, params, (err, results) => {
@@ -59,7 +57,6 @@ app.post("/buildings", (req, res) => {
     res.status(201).json({
       message: 'Building added successfully',
       building: {
-        // id: newBuilding.id, 
         name: newBuilding.name, 
         bce: newBuilding.bce, 
         adress: newBuilding.adress
@@ -69,13 +66,13 @@ app.post("/buildings", (req, res) => {
 });
 
 // Endpoint to delete a building
-app.delete('/buildings', (req, res) => {
-  console.log(`DELETE /building request received`);
+app.delete('/buildings_info', (req, res) => {
+  console.log(`DELETE /buildings_info request received`);
 
   const toBeDeletedBuilding = req.body;
   console.log("to be deleted building:", toBeDeletedBuilding);
 
-  const query = `DELETE FROM buildings WHERE name = ? AND bce = ?;`;
+  const query = `DELETE FROM buildings_info WHERE building_name = ? AND building_bce = ?;`;
   const params = [toBeDeletedBuilding.name, toBeDeletedBuilding.bce];
 
   connection.query(query, params, (err, results) => {

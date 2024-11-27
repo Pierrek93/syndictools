@@ -26,12 +26,10 @@
         <section class="main-section">
             <nav class="navigation-list">
                 <ul>
-                    <li id="list-building-nav">All buildings</li>
-                    <li id="create-building-nav">Creation building</li>
-                    <li id="intervention-nav">Intervention</li>
+                    <li id="list-building-nav">My Buildings</li>
+                    <li id="operation-nav">operation</li>
                     <li id="follow-up-nav">Suivi</li>
-                    <li id="information-nav">information building</li>
-                    <li id="syndicat-nav">Conseil de Copropriete</li>
+                    <li id="information-nav">information building</li> 
                 </ul>
             </nav>
 
@@ -89,15 +87,57 @@
                     
                 
 
-                <div id="intervention-section">
-                        <!-- to do -->
+                <div id="operation-section" style = 'display: none'>
+                    <fieldset>
+                        <legend>Select Type</legend>
+                        <label for="type-select">operation Type:</label>
+                        <select id="type-select">
+                            <option value="" disabled selected>Choose operation type</option>
+                            <option value="repair">operation</option>
+                            <option value="maintenance">Entretien</option>
+                            <option value="inspection">Livraison</option>
+                            <option value="quotation">Devis</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Select Building</legend>
+                        <label for="building-select">Building:</label>
+                        <select id="building-select">
+                            <option value="" disabled selected>Choose a building</option>
+                            <option value="building1">Building 1</option>
+                            <option value="building2">Building 2</option>
+                            <option value="building3">Building 3</option>
+                        </select>
+                    </fieldset>
+                    
+                    <button class="generate-mail-btn">Generate</button>
+
+                    <fieldset>
+                        <legend>Description:</legend>
+                        <textarea id="intervention-details" placeholder="Enter text here" style="width: 50rem; height:20rem;"></textarea>
+                    </fieldset>
                 </div>
+                
                 
                 <div id="follow-up-section">
                         <!-- to do -->
                 </div>
                 
-                <div id="information-section">
+                <div id="information-section" style = 'display: none'>
+
+                    <fieldset>
+                        <legend>Select Building</legend>
+                        <label for="building-select">Building:</label>
+                        <select id="building-select">
+                            <option value="" disabled selected>Choose a building</option>
+                            <option value="building1">Building 1</option>
+                            <option value="building2">Building 2</option>
+                            <option value="building3">Building 3</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset>
                         <p>Compteur Gaz: <span>123123</span></p>
                         <p>Nombre d'ascenseur: <span>123123</span></p>
                         <p>Installation ascenseur: <span>123123</span></p>
@@ -108,20 +148,22 @@
                         <p>monte-charge: <span>123123</span></p>
                         <p>Nombre d'etage: <span>123123</span></p>
                         <p>Installation porte parking: <span>123123</span></p>  
-                </div>
+                    </fieldset>
 
-                <div id="syndicat-section" style = 'display: none'>
-                    <div class="display-syndicat">
-                        <span>CC num 1</span>
-                        <span>CC num 2</span>
-                        <span>CC num 3</span>
-                        <span>CC num 4</span>
+                    <button>modify building</button>
+
+                    <div id="syndicat-div" style="background-color: blue; margin-top: 1rem;">
+                        <div class="display-syndicat">
+                            <span>CC num 1</span>
+                            <span>CC num 2</span>
+                            <span>CC num 3</span>
+                            <span>CC num 4</span>
+                        </div>
+                        
+                        <input class="add-syndicat"/>
+                        <button class="#" id="#">+</button><button id="#">-</button>
                     </div>
-                    
-                    <input class="add-syndicat"/>
-                    <button class="#" id="#">+</button><button id="#">-</button>
                 </div>
-
             </div>
 
 
@@ -133,6 +175,7 @@
     </footer>
 
     <script src="dashboard.js"></script>
-    <script src="database.js"></script>
+    <script src="buildings.js"></script>
+    <script src="operations.js"></script>
 </body>
 </html>
