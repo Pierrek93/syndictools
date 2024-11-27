@@ -26,7 +26,7 @@ connection.connect(err => {
 app.use(cors({ origin: "http://127.0.0.1:5500" }));
 app.use(express.json());
 
-// Endpoint to fetch data from the 'buildings' table
+// Endpoint to fetch data from the 'buildings_info' table
 app.get('/buildings_info', (req, res) => {
   connection.query('SELECT * FROM buildings_info', (err, results) => {
     if (err) {
@@ -37,7 +37,7 @@ app.get('/buildings_info', (req, res) => {
   });
 });
 
-// Endpoint to post buildings to the database
+// Endpoint to post to buildings_info database
 app.post("/buildings_info", (req, res) => {
   console.log(`POST /buildings_info request received`);
 
