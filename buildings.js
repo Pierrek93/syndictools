@@ -6,27 +6,25 @@ const listBuildingsButtonElement = document.getElementById('list-buildings-btn')
 
 async function listBuildings() {
   const tableBody = document.querySelector('#buildings-table tbody');
-  tableBody.innerHTML = ''; // Clear any existing rows in the table body
+  tableBody.innerHTML = '';
   console.log('Fetching buildings...');
 
   try {
-    const response = await fetch("http://localhost:3000/buildings_info");
+    const response = await fetch("http://localhost:3000/buildings_info?fields=building_name,building_bce,building_adress");
     const buildings = await response.json();
 
-    buildings.forEach(eachBuilding => {
-      console.log(`Each building:`, eachBuilding);
+    console.log(`specific ${buildings}`)
 
-      // Create a new table row
+    buildings.forEach(eachBuilding => {
+
       const row = document.createElement('tr');
 
-      // Populate the row with data
       Object.values(eachBuilding).forEach(value => {
         const cell = document.createElement('td');
         cell.textContent = value;
         row.appendChild(cell);
       });
 
-      // Append the row to the table body
       tableBody.appendChild(row);
     });
   } catch (error) {

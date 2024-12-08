@@ -28,7 +28,14 @@ app.use(express.json());
 
 // Endpoint to fetch data from the 'buildings_info' table
 app.get('/buildings_info', (req, res) => {
-  connection.query('SELECT * FROM buildings_info', (err, results) => {
+  const { fields, building_name } = req.query;
+
+  const selectedFields = fields || '*';
+  const buildingFilter = building_name ? `WHERE building_name = '${building_name}'` : '';
+
+  const query = `SELECT ${selectedFields} FROM buildings_info  ${buildingFilter}`;
+
+  connection.query(query, (err, results) => {
     if (err) {
       res.status(500).json({ error: 'Database query failed' });
       return;

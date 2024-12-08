@@ -39,7 +39,6 @@
                     <table id="buildings-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Name</th>
                                 <th>BCE</th>
                                 <th>Address</th>
@@ -47,7 +46,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th>1</th>
                                 <th>Echevinage</th>
                                 <th>123.123.123</th>
                                 <th>Ave Eche 20</th>
@@ -128,29 +126,20 @@
 
                     <fieldset>
                         <legend>Select Building</legend>
-                        <label for="building-select">Building:</label>
-                        <select id="building-select">
-                            <option value="" disabled selected>Choose a building</option>
-                            <option value="building1">Building 1</option>
+                        <label for="building-dropdown-select">Building:</label>
+                        <select id="building-dropdown-select">
+                            <option value="#" disabled selected>#</option>
                         </select>
-                        <button>display information</button>
+                        <button id="display-information-btn">display information</button>
                     </fieldset>
 
                     <fieldset>
-                        <p>Nombre d'ascenseur: <span>123123</span></p>
-                        <p>Compteur Gaz: <span>123123</span></p>
-                        <p>Compteur Electricite: <span>123123</span></p>
-                        <!-- <p>Installation ascenseur: <span>123123</span></p>
-                        <p>Nombre d'exctincteur: <span>123123</span></p>
-                        <p>Nombre de Devidoirs: <span>123123</span></p>
-                        <p>Code Chaufferie: <span>123123</span></p>
-                        <p>Installation Chaudiere: <span>123123</span></p>
-                        <p>monte-charge: <span>123123</span></p>
-                        <p>Nombre d'etage: <span>123123</span></p>
-                        <p>Installation porte parking: <span>123123</span></p>   -->
+                        <p id="gas-meter">Compteur Gaz: <span>123123</span></p>
+                        <p id="electricity-meter">Compteur Electricite: <span>123123</span></p>
+                        <p id="building-year">Building year: <span>123123</span></p>
                     </fieldset>
 
-                    <button>modify building</button>
+                    <button id="#">modify building</button>
 
                     <div id="syndicat-div" style="background-color: blue; margin-top: 1rem;">
                         <div class="display-syndicat">

@@ -1,18 +1,19 @@
 console.log('Buildings-information.js succesfully loaded')
 
-async function getBuildingNames() {
 
-  console.log('Fetching buildings...');
+const informationSectionEle = document.getElementById('information-section');
+
+async function getBuildingNames() {
+  console.log('Fetching buildings names...');
 
     try{
-        const response = await fetch(`http://localhost:3000/buildings_info`)
+        const response = await fetch(`http://localhost:3000/buildings_info?fields=building_name`)
         const result = await response.json();
 
         const buildingArray = []
 
         result.forEach(building => {
-        console.log(building.building_name)
-        buildingArray.push(building.building_name)
+        buildingArray.push({name: building.building_name})
         })
 
         return buildingArray
@@ -23,39 +24,67 @@ async function getBuildingNames() {
 }
 
 function dropDownDisplay(buildingArray){
-    const informationSectionEle = document.getElementById('information-section');
-    const buildingSelectEle = informationSectionEle.querySelector('#building-select');
-    buildingSelectEle.innerHTML = '';
+  const buildingSelectEle = informationSectionEle.querySelector('#building-dropdown-select');
+  buildingSelectEle.innerHTML = '';
 
-    console.log(buildingArray)
-
-    for (let i = 0; i < buildingArray.length; i++) {
-        const option = document.createElement('option');
-        option.value = buildingArray[i]; 
-        option.textContent = buildingArray[i];  
-        buildingSelectEle.appendChild(option);
-    };
-};
-
-async function displayBuildingInformation() {
-    buildingSelectEle.addEventListener('change', function() {
-        return buildingSelectEle.value;
+  try {
+    buildingArray.forEach((building, index) => {
+      const option = document.createElement('option');
+      option.value = index; 
+      option.textContent = building.name; 
+      buildingSelectEle.appendChild(option);
     });
+  } catch (error) {
+    const option = document.createElement('option');
+    option.value = 1;  
+    option.textContent = `Error Fetching`;   
+    buildingSelectEle.appendChild(option);
+  }
 
-    try {
-        const buildingInfoResponse = await fetch(`http://localhost:3000/buildings_details`)
-        const buildingInforesult = await buildingInfoResponse.json();
-
-        console.log(buildingInforesult)
-        
-    } catch (error) {
-        console.error(`couldn't fetch the building details ${error}`)
-    }
-
+  return buildingSelectEle;
 }
 
-document.addEventListener('DOMContentLoaded', async function() {
-    const buildingArray = await getBuildingNames();  
-    dropDownDisplay(buildingArray); 
-})
+const displayBuildingInformationBtnEle = document.getElementById('display-information-btn');
 
+// Function that is triggered when the button is clicked
+async function displayBuildingInformation() {
+  const buildingSelectEle = document.getElementById('building-dropdown-select');
+  const selectedOption = buildingSelectEle.options[buildingSelectEle.selectedIndex];
+  let gasMeterData, electricityMeterData, buildingYearData
+
+  if (selectedOption.value === "") {
+    console.log("No building selected.");
+  } else {
+    console.log(`Selected Option Text: ${selectedOption.textContent}`);
+  }
+
+  try {
+  const response = await fetch(`http://localhost:3000/buildings_info?building_name=${selectedOption.textContent}`);
+  const result = await response.json();
+
+  console.log(`result: `, result)
+
+  gasMeterData = result[0].gas_meter;
+  buildingYearData = result[0].building_year;
+  electricityMeterData = result[0].eletricity_meter;
+
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+
+  const gasMeterEle = informationSectionEle.querySelector('#gas-meter span')
+  const electricityMeterEle = informationSectionEle.querySelector('#electricity-meter span')
+  const buildingYearEle = informationSectionEle.querySelector('#building-year span')
+
+  gasMeterEle.textContent = gasMeterData;
+  electricityMeterEle.textContent = electricityMeterData;
+  buildingYearEle.textContent = buildingYearData;
+  
+}
+
+displayBuildingInformationBtnEle.addEventListener('click', displayBuildingInformation);
+
+document.addEventListener('DOMContentLoaded', async function () {
+  const buildingArray = await getBuildingNames();
+  const buildingSelectEle = dropDownDisplay(buildingArray);
+});
