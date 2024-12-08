@@ -68,12 +68,12 @@
                         </div>
                         <div id="#" style="background-color: blueviolet; margin-top: 1rem;">
                             <form id="add-building-form">
-                                <label for="building-name">Building Name:</label>
-                                <input type="text" id="building-name" required /><br>
-                                <label for="building-bce">Building BCE:</label>
-                                <input type="text" id="building-bce" required /><br>
-                                <label for="building-address">Building Address:</label>
-                                <input type="text" id="building-adress" required />
+                                <label for="building-name-form">Building Name:</label>
+                                <input type="text" id="building-name-form" required /><br>
+                                <label for="building-bce-form">Building BCE:</label>
+                                <input type="text" id="building-bce-form" required /><br>
+                                <label for="building-adress-form">Building Address:</label>
+                                <input type="text" id="building-adress-form" required />
                             </form>
                         </div>
                         <div class="#" style="background-color: yellow; margin-top: 1rem; text-align: center;">
@@ -133,13 +133,17 @@
                         <button id="display-information-btn">display information</button>
                     </fieldset>
 
-                    <fieldset>
+                    <fieldset id="building-information-fieldset">
+                        <h4 id="building-id" style="display: none">Building ID: <span>11111</span></h4>
+                        <h4 id="building-name">Building Name: <span>11111</span></h4>
+                        <h4 id="building-bce">Building BCE: <span>22222</span></h4>
                         <p id="gas-meter">Compteur Gaz: <span>123123</span></p>
                         <p id="electricity-meter">Compteur Electricite: <span>123123</span></p>
                         <p id="building-year">Building year: <span>123123</span></p>
                     </fieldset>
 
-                    <button id="#">modify building</button>
+                    <button id="modify-building-information">modify info</button>
+                    <button id="save-building-information">Save</button>
 
                     <div id="syndicat-div" style="background-color: blue; margin-top: 1rem;">
                         <div class="display-syndicat">

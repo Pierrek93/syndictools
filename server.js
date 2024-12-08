@@ -33,7 +33,7 @@ app.get('/buildings_info', (req, res) => {
   const selectedFields = fields || '*';
   const buildingFilter = building_name ? `WHERE building_name = '${building_name}'` : '';
 
-  const query = `SELECT ${selectedFields} FROM buildings_info  ${buildingFilter}`;
+  const query = `SELECT ${selectedFields} FROM buildings_info ${buildingFilter}`;
 
   connection.query(query, (err, results) => {
     if (err) {
@@ -69,6 +69,31 @@ app.post("/buildings_info", (req, res) => {
         adress: newBuilding.adress
       } 
     });
+  });
+});
+
+// Endpoint to update a building's information
+app.put('/buildings_info', (req, res) => {
+  const { building_id, gas_meter, electricity_meter, building_year } = req.body;
+
+  console.log(`received for modification: `, req.body)
+
+  const query = `
+    UPDATE buildings_info
+    SET gas_meter = ?, electricity_meter = ?, building_year = ?
+    WHERE building_id = ?
+  `;
+
+  const params = [gas_meter, electricity_meter, building_year, building_id];
+
+  connection.query(query, params, (err, results) => {
+    if (err) {
+      console.error('Error updating building info:', err);
+      res.status(500).json({ error: 'Failed to update building information' });
+      return;
+    }
+
+    res.json({ message: 'Building information updated successfully' });
   });
 });
 

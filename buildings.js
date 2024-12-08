@@ -43,9 +43,9 @@ async function createBuilding() {
   const newCreatedBuilding = { name: '#', bce: '#', adress: '#' };
 
   const propertyMap = {
-    'building-name': 'name',
-    'building-bce': 'bce',
-    'building-adress': 'adress'
+    'building-name-form': 'name',
+    'building-bce-form': 'bce',
+    'building-adress-form': 'adress'
   };
 
   inputElements.forEach(element => {
