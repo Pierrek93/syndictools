@@ -91,7 +91,7 @@
                         <label for="type-select">operation Type:</label>
                         <select id="type-select">
                             <option value="" disabled selected>Choose operation type</option>
-                            <option value="repair">operation</option>
+                            <option value="repair">Intervention</option>
                             <option value="maintenance">Entretien</option>
                             <option value="inspection">Livraison</option>
                             <option value="quotation">Devis</option>
@@ -100,20 +100,17 @@
 
                     <fieldset>
                         <legend>Select Building</legend>
-                        <label for="building-select">Building:</label>
-                        <select id="building-select">
-                            <option value="" disabled selected>Choose a building</option>
-                            <option value="building1">Building 1</option>
-                            <option value="building2">Building 2</option>
-                            <option value="building3">Building 3</option>
+                        <label for="operation-building-dropdown">Building:</label>
+                        <select id="operation-building-dropdown" class="building-dropdown-select">
+                            <option value="#" disabled selected>#</option>
                         </select>
                     </fieldset>
                     
-                    <button class="generate-mail-btn">Generate</button>
+                    <button id="generate-mail-btn">Generate</button>
 
                     <fieldset>
                         <legend>Description:</legend>
-                        <textarea id="intervention-details" placeholder="Enter text here" style="width: 50rem; height:20rem;"></textarea>
+                        <textarea id="textarea-template-display" placeholder="Enter text here" style="width: 50rem; height:20rem;"></textarea>
                     </fieldset>
                 </div>
                 
@@ -126,8 +123,8 @@
 
                     <fieldset>
                         <legend>Select Building</legend>
-                        <label for="building-dropdown-select">Building:</label>
-                        <select id="building-dropdown-select">
+                        <label for="information-building-dropdown">Building:</label>
+                        <select id="information-building-dropdown" class="building-dropdown-select">
                             <option value="#" disabled selected>#</option>
                         </select>
                         <button id="display-information-btn">display information</button>

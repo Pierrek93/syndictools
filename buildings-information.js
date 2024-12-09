@@ -24,7 +24,7 @@ async function getBuildingNames() {
 }
 
 function dropDownDisplay(buildingArray){
-  const buildingSelectEle = informationSectionEle.querySelector('#building-dropdown-select');
+  const buildingSelectEle = informationSectionEle.querySelector('#information-building-dropdown');
   buildingSelectEle.innerHTML = '';
 
   try {
@@ -48,7 +48,7 @@ const displayBuildingInformationBtnEle = document.getElementById('display-inform
 
 // Function that is triggered when the button is clicked
 async function displayBuildingInformation() {
-  const buildingSelectEle = document.getElementById('building-dropdown-select');
+  const buildingSelectEle = document.getElementById('information-building-dropdown');
   const selectedOption = buildingSelectEle.options[buildingSelectEle.selectedIndex];
   let buildingIdData, buildingNameData, buildingBceData, gasMeterData, electricityMeterData, buildingYearData
 
