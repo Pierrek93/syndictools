@@ -1,17 +1,17 @@
 console.log('Operations.js succesfully loaded')
 
 const operationSectionEle = document.getElementById(`operation-section`);
+// const generateEmailBtnEle = document.getElementById(`generate-mail-btn`);
+const operationSelectionEle = document.querySelector('#type-select');
 
-const generateEmailBtnEle = document.getElementById(`generate-mail-btn`);
 
 function displayTemplateMail () {
-    const operationSelectionEle = operationSectionEle.querySelector(`#type-select`);
     const textareaSectionEle = operationSectionEle.querySelector(`#textarea-template-display`);
 
     const selectedOption = operationSelectionEle.options[operationSelectionEle.selectedIndex];
 
     if(selectedOption.textContent === `Intervention` ) {
-        textareaSectionEle.textContent = `Bonjour [Nom du destinataire],
+        textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
 Objet : Demande d’intervention - Référence : XXXXXXXXXXX
 
@@ -45,7 +45,7 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
     }
     // else if(selectedOption.textContent === `Entretien` ) {}
     else if(selectedOption.textContent === `Livraison` ) {
-        textareaSectionEle.textContent = `Bonjour [Nom du destinataire],
+        textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
 Objet : Demande de livraison - Référence : XXXXXXXXXXX
 
@@ -79,7 +79,7 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
         `
     }
     else if(selectedOption.textContent === `Devis` ) {
-        textareaSectionEle.textContent = `Bonjour [Nom du destinataire],
+        textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
 Objet : Demande de devis- Référence : XXXXXXXXXXX
 
@@ -102,4 +102,4 @@ Dans l’attente de votre retour, je vous prie d’agréer, [Nom du destinataire
     }
 };
 
-generateEmailBtnEle.addEventListener(`click`, displayTemplateMail);
+operationSelectionEle.addEventListener('change', displayTemplateMail);
