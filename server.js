@@ -3,7 +3,7 @@ console.log('Server.js is successfully loaded');
 const express = require("express");
 const mysql = require('mysql2');
 const cors = require("cors");
-const confidentialInfo = require('./confidential');
+const confidentialInfo = require('./js/confidential');
 
 const app = express();
 const PORT = 3000;
