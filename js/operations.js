@@ -1,9 +1,9 @@
-console.log('Operations.js succesfully loaded')
+console.log('Operations.js succesfully loaded');
+
+import { getBuildingInfo, dropDownDisplay } from "../js/modules/utilities.js";
 
 const operationSectionEle = document.getElementById(`operation-section`);
-// const generateEmailBtnEle = document.getElementById(`generate-mail-btn`);
 const operationSelectionEle = document.querySelector('#type-select');
-
 
 function displayTemplateMail () {
     const textareaSectionEle = operationSectionEle.querySelector(`#textarea-template-display`);

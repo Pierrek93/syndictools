@@ -1,6 +1,6 @@
 console.log('Buildings-information.js succesfully loaded')
 
-import { getBuildingNames, dropDownDisplay } from '../js/modules/utilities.js';
+import { getBuildingInfo, dropDownDisplay } from "../js/modules/utilities.js";
 
 const informationSectionEle = document.getElementById('information-section');
 
@@ -130,8 +130,3 @@ async function saveBuildingInformation() {
 };
 
 saveBuildingInfoBtnEle.addEventListener('click', saveBuildingInformation);
-
-document.addEventListener('DOMContentLoaded', async function () {
-  const buildingArray = await getBuildingNames();
-  const buildingSelectEle = dropDownDisplay(buildingArray);
-});
