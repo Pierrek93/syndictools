@@ -4,18 +4,31 @@ import { getBuildingInfo, dropDownDisplay } from "../js/modules/utilities.js";
 
 const operationSectionEle = document.getElementById(`operation-section`);
 const operationSelectionEle = document.querySelector('#type-select');
+let generateMailBtnEle = document.getElementById(`generate-mail-btn`)
 
-function displayTemplateMail () {
+async function displayTemplateMail () {
+    const buildingInfo = await getBuildingInfo();
     const textareaSectionEle = operationSectionEle.querySelector(`#textarea-template-display`);
+    const buildingSelectionEle = document.getElementById(`operation-building-dropdown`)
+    const selectedOperationOption = operationSelectionEle.options[operationSelectionEle.selectedIndex];
+    const selectedBuildingOption = buildingSelectionEle.options[buildingSelectionEle.selectedIndex];
+    
+    let buildingName, buildingBce, buildingAddress
 
-    const selectedOption = operationSelectionEle.options[operationSelectionEle.selectedIndex];
+    buildingInfo.forEach(building => {
+        if(building.name === selectedBuildingOption.textContent){
+            buildingName = building.name
+            buildingBce = building.bce
+            buildingAddress = building.address
+        }
+      });
 
-    if(selectedOption.textContent === `Intervention` ) {
+    if(selectedOperationOption.textContent === `Intervention` ) {
         textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
 Objet : Demande d’intervention - Référence : XXXXXXXXXXX
 
-ACP XXXXXX, Adresse XXXXX
+ACP ${buildingName}, Adresse ${buildingAddress}
 
 Je me permets de vous contacter afin de solliciter une intervention concernant le problème suivant :
 
@@ -33,8 +46,8 @@ Veuillez également noter que toute facture relative à cette intervention doit 
 
 Libellé de facturation :
 Référence : XXXXX
-ACP : XXXXXXX
-BCE : XXXXXXX
+ACP : ${buildingName}
+BCE : ${buildingBce}
 C/O Office des Propriétaires
 Rue Vilain XIIII 53-55
 1000 Bruxelles
@@ -43,13 +56,13 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
     `
         
     }
-    // else if(selectedOption.textContent === `Entretien` ) {}
-    else if(selectedOption.textContent === `Livraison` ) {
+    // else if(selectedOperationOption.textContent === `Entretien` ) {}
+    else if(selectedOperationOption.textContent === `Livraison` ) {
         textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
 Objet : Demande de livraison - Référence : XXXXXXXXXXX
 
-ACP XXXXXX, Adresse XXXXX
+ACP ${buildingName}, Adresse ${buildingAddress}
 
 Je me permets de vous contacter afin de solliciter une livraison pour le suivant :
 
@@ -69,8 +82,8 @@ Veuillez également noter que toute facture relative à cette intervention doit 
 
 Libellé de facturation :
 Référence : XXXXX
-ACP : XXXXXXX
-BCE : XXXXXXX
+ACP : ${buildingName}
+BCE : ${buildingBce}
 C/O Office des Propriétaires
 Rue Vilain XIIII 53-55
 1000 Bruxelles
@@ -78,12 +91,12 @@ Rue Vilain XIIII 53-55
 Dans l’attente de votre retour, je vous prie d’agréer, l’expression de mes salutations distinguées.
         `
     }
-    else if(selectedOption.textContent === `Devis` ) {
+    else if(selectedOperationOption.textContent === `Devis` ) {
         textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
 Objet : Demande de devis- Référence : XXXXXXXXXXX
 
-ACP XXXXXX, Adresse XXXXX
+ACP ${buildingName}, Adresse ${buildingAddress}
 
 Je me permets de vous contacter afin de solliciter un devis pour le problème suivant :
 
@@ -103,3 +116,5 @@ Dans l’attente de votre retour, je vous prie d’agréer, [Nom du destinataire
 };
 
 operationSelectionEle.addEventListener('change', displayTemplateMail);
+
+generateMailBtnEle.addEventListener(`click`, displayTemplateMail)

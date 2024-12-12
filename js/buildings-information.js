@@ -1,12 +1,9 @@
 console.log('Buildings-information.js succesfully loaded')
 
-import { getBuildingInfo, dropDownDisplay } from "../js/modules/utilities.js";
-
 const informationSectionEle = document.getElementById('information-section');
 
 const displayBuildingInformationBtnEle = document.getElementById('display-information-btn');
 
-// Function that is triggered when the button is clicked
 async function displayBuildingInformation() {
   const buildingSelectEle = document.getElementById('information-building-dropdown');
   const selectedOption = buildingSelectEle.options[buildingSelectEle.selectedIndex];

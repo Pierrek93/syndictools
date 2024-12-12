@@ -27,9 +27,11 @@ export async function getBuildingInfo() {
 
 export function dropDownDisplay(buildingInfoArray) {
     const selectElementsEle = document.querySelectorAll('.building-dropdown-select');
-  
+    const selectedOption = []
+
     selectElementsEle.forEach((buildingSelectEle) => {
       buildingSelectEle.innerHTML = ''; 
+      
   
       try {
         buildingInfoArray.forEach((building, index) => {
@@ -38,19 +40,27 @@ export function dropDownDisplay(buildingInfoArray) {
           option.textContent = building.name;
           buildingSelectEle.appendChild(option);
         });
+
+        buildingSelectEle.addEventListener('change', (event) => {
+          const selectedIndex = event.target.value;
+          selectedOption = buildingInfoArray[selectedIndex]?.name || null;
+      });
+
       } catch (error) {
         const option = document.createElement('option');
         option.value = 1;  
         option.textContent = 'Error Fetching';   
         buildingSelectEle.appendChild(option);
       }
+
+      
     });
-  
-    return selectElementsEle;
+
+    return () => selectedOption
   }
 
   document.addEventListener('DOMContentLoaded', async function () {
     const buildingInfoArray = await getBuildingInfo();
-    const buildingSelectEle = dropDownDisplay(buildingInfoArray);
+    const selectedOption = dropDownDisplay(buildingInfoArray);
   });
 
