@@ -6,13 +6,55 @@ const operationSectionEle = document.getElementById(`operation-section`);
 const operationSelectionEle = document.querySelector('#type-select');
 let generateMailBtnEle = document.getElementById(`generate-mail-btn`)
 
-async function displayTemplateMail () {
+async function generateReference () {
     const buildingInfo = await getBuildingInfo();
-    const textareaSectionEle = operationSectionEle.querySelector(`#textarea-template-display`);
-    const buildingSelectionEle = document.getElementById(`operation-building-dropdown`)
-    const selectedOperationOption = operationSelectionEle.options[operationSelectionEle.selectedIndex];
+    const buildingSelectionEle = document.getElementById(`operation-building-dropdown`);
     const selectedBuildingOption = buildingSelectionEle.options[buildingSelectionEle.selectedIndex];
     
+    let buildingRef = ``
+    
+    buildingInfo.forEach(building => {
+        
+        if(building.name === selectedBuildingOption.textContent){
+            buildingRef = building.name.slice(0, 3).toUpperCase()
+        }
+      });
+
+    const selectedOperationOption = operationSelectionEle.options[operationSelectionEle.selectedIndex]
+
+    let operationRef = ''
+
+    if(selectedOperationOption.textContent === `Intervention` ){
+        operationRef = `INT`
+    }
+    else if(selectedOperationOption.textContent === `Livraison` ){
+        operationRef = `LIV`
+    }
+    else if(selectedOperationOption.textContent === `Devis` ){
+        operationRef = `DEV`
+    }
+
+
+    let numberRef = ''
+
+    for (let i=0; i<5; i++){
+        let generatedNumber = Math.floor(Math.random()*10)
+        numberRef += generatedNumber
+    }
+    // console.log(`${buildingRef}-INT${numberRef}AA`)
+
+    let fullReference = `${buildingRef}-${operationRef}${numberRef}-24`
+
+    return fullReference
+}
+
+async function displayTemplateMail () {
+    const buildingInfo = await getBuildingInfo();
+    const fullReference = await generateReference();
+    const textareaSectionEle = operationSectionEle.querySelector(`#textarea-template-display`);
+    const selectedOperationOption = operationSelectionEle.options[operationSelectionEle.selectedIndex]
+    const buildingSelectionEle = document.getElementById(`operation-building-dropdown`);
+    const selectedBuildingOption = buildingSelectionEle.options[buildingSelectionEle.selectedIndex];    
     let buildingName, buildingBce, buildingAddress
 
     buildingInfo.forEach(building => {
@@ -26,7 +68,7 @@ async function displayTemplateMail () {
     if(selectedOperationOption.textContent === `Intervention` ) {
         textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
-Objet : Demande d’intervention - Référence : XXXXXXXXXXX
+Objet : Demande d’intervention - Référence : ${fullReference}
 
 ACP ${buildingName}, Adresse ${buildingAddress}
 
@@ -45,7 +87,7 @@ Je vous remercie par avance pour votre réactivité.
 Veuillez également noter que toute facture relative à cette intervention doit être envoyée à l’adresse suivante : invoice@op.be.
 
 Libellé de facturation :
-Référence : XXXXX
+Référence : ${fullReference}
 ACP : ${buildingName}
 BCE : ${buildingBce}
 C/O Office des Propriétaires
@@ -60,7 +102,7 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
     else if(selectedOperationOption.textContent === `Livraison` ) {
         textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
-Objet : Demande de livraison - Référence : XXXXXXXXXXX
+Objet : Demande de livraison - Référence : ${fullReference}
 
 ACP ${buildingName}, Adresse ${buildingAddress}
 
@@ -81,7 +123,7 @@ Je vous remercie par avance pour votre réactivité.
 Veuillez également noter que toute facture relative à cette intervention doit être envoyée à l’adresse suivante : invoice@op.be.
 
 Libellé de facturation :
-Référence : XXXXX
+Référence : ${fullReference}
 ACP : ${buildingName}
 BCE : ${buildingBce}
 C/O Office des Propriétaires
@@ -94,7 +136,7 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
     else if(selectedOperationOption.textContent === `Devis` ) {
         textareaSectionEle.value = `Bonjour [Nom du destinataire],
 
-Objet : Demande de devis- Référence : XXXXXXXXXXX
+Objet : Demande de devis- Référence : ${fullReference}
 
 ACP ${buildingName}, Adresse ${buildingAddress}
 
@@ -115,6 +157,11 @@ Dans l’attente de votre retour, je vous prie d’agréer, [Nom du destinataire
     }
 };
 
+function handleClickEvent() {
+    displayTemplateMail();
+    generateReference();
+}
+
 operationSelectionEle.addEventListener('change', displayTemplateMail);
 
-generateMailBtnEle.addEventListener(`click`, displayTemplateMail)
+generateMailBtnEle.addEventListener(`click`, handleClickEvent)

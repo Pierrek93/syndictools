@@ -88,6 +88,14 @@
 
                 <div id="operation-section" style = 'display: none'>
                     <fieldset>
+                        <legend>Select Building</legend>
+                        <label for="operation-building-dropdown">Building:</label>
+                        <select id="operation-building-dropdown" class="building-dropdown-select">
+                            <option value="#" disabled selected>#</option>
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
                         <legend>Select Type</legend>
                         <label for="type-select">operation Type:</label>
                         <select id="type-select">
@@ -99,14 +107,6 @@
                         </select>
                     </fieldset>
 
-                    <fieldset>
-                        <legend>Select Building</legend>
-                        <label for="operation-building-dropdown">Building:</label>
-                        <select id="operation-building-dropdown" class="building-dropdown-select">
-                            <option value="#" disabled selected>#</option>
-                        </select>
-                    </fieldset>
-                    
                     <button id="generate-mail-btn">Generate</button>
 
                     <fieldset>
