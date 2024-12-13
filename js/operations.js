@@ -66,7 +66,7 @@ async function displayTemplateMail () {
       });
 
     if(selectedOperationOption.textContent === `Intervention` ) {
-        textareaSectionEle.value = `Bonjour [Nom du destinataire],
+        textareaSectionEle.value = `Bonjour,
 
 Objet : Demande d’intervention - Référence : ${fullReference}
 
@@ -74,11 +74,11 @@ ACP ${buildingName}, Adresse ${buildingAddress}
 
 Je me permets de vous contacter afin de solliciter une intervention concernant le problème suivant :
 
-[Détails de l'intervention à compléter par le responsable]
+__[Détails de l'intervention à compléter par le responsable]__
 
 Nous vous serions reconnaissants d’organiser cette intervention dans les plus brefs délais.
 
-Pour permettre l’accès à l’immeuble, nous vous prions de bien vouloir contacter [Nom de la personne de contact] au [GSM].
+Pour permettre l’accès à l’immeuble, nous vous prions de bien vouloir contacter __[Nom de la personne de contact] au [GSM]__.
 
 Nous restons bien entendu à votre disposition pour toute information complémentaire.
 
@@ -100,7 +100,7 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
     }
     // else if(selectedOperationOption.textContent === `Entretien` ) {}
     else if(selectedOperationOption.textContent === `Livraison` ) {
-        textareaSectionEle.value = `Bonjour [Nom du destinataire],
+        textareaSectionEle.value = `Bonjour,
 
 Objet : Demande de livraison - Référence : ${fullReference}
 
@@ -134,7 +134,7 @@ Dans l’attente de votre retour, je vous prie d’agréer, l’expression de me
         `
     }
     else if(selectedOperationOption.textContent === `Devis` ) {
-        textareaSectionEle.value = `Bonjour [Nom du destinataire],
+        textareaSectionEle.value = `Bonjour,
 
 Objet : Demande de devis- Référence : ${fullReference}
 
@@ -152,7 +152,7 @@ Nous restons à votre disposition pour toute information complémentaire.
 
 Je vous remercie par avance pour votre réactivité.
 
-Dans l’attente de votre retour, je vous prie d’agréer, [Nom du destinataire], l’expression de mes salutations distinguées.
+Dans l’attente de votre retour, je vous prie d’agréer, l’expression de mes salutations distinguées.
         `
     }
 };
