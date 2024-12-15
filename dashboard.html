@@ -42,24 +42,26 @@
                             <tr>
                                 <th>Name</th>
                                 <th>BCE</th>
-                                <th>Address</th>
+                                <th>Address (Rue Numero, Code-Postale Ville)</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="building-table-body">
                             <tr>
-                                <th>Echevinage</th>
-                                <th>123.123.123</th>
-                                <th>Ave Eche 20</th>
+                                <th class="building-name-details">Echevinage</th>
+                                <th class="building-bce-details">123.123.123</th>
+                                <th class="building-address-details">Ave Eche 20</th>
                             </tr>
                         </tbody>
                     </table>
                     <div class="buttons-container">
                         <button id="list-buildings-btn">List my Building</button>
                         <button id="create-buildings-btn" type="submit">Create Building</button>
-                        <button id="#">Modify Building</button>
+                        <button id="modify-buildings-btn">Modify Building</button>
                         <button id="delete-building-btn">Delete Building</button>
-                        <button id="#">Search Building</button>
+                        <button id="save-buildings-btn">SAVE</button>
                     </div>
+
+                    <button style='margin-top: 1rem;'> + </button>
 
                     <div class="popup-container">
                         <div id="delete-follow-up" style="background-color: red; margin-top: 1rem;">
@@ -159,7 +161,7 @@
                 <div id="extra-info-section" style="display:none">
                     <fieldset>
                         <ul>
-                            <li><a href="https://www.acerta.be/fr/independants/services-supplementaires/syndic">Modification de l'inscription du syndic auprès de la Banque Carrefour des Entreprises (BCE)</a></li>
+                            <li><a href="https://www.acerta.be/fr/independants/services-supplementaires/syndic" target="blank">Modification de l'inscription du syndic auprès de la Banque Carrefour des Entreprises (BCE)</a></li>
                             <li>Other</li>
                         </ul>
                     </fieldset>

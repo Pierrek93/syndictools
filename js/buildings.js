@@ -19,9 +19,18 @@ async function listBuildings() {
 
       const row = document.createElement('tr');
 
-      Object.values(eachBuilding).forEach(value => {
+      Object.values(eachBuilding).forEach((value, index) => {
         const cell = document.createElement('td');
         cell.textContent = value;
+        
+        if (index === 0) {
+          cell.classList.add('building-name-details');
+        } else if (index === 1) {
+          cell.classList.add('building-bce-details');
+        } else if (index === 2) {
+          cell.classList.add('building-address-details');
+        }
+
         row.appendChild(cell);
       });
 
@@ -78,9 +87,76 @@ async function createBuilding() {
   } catch (error) {
     console.error('Error adding building:', error);
   }
+listBuildings();
 }
 
 createBuildingsButtonElement.addEventListener('click', createBuilding)
+
+
+const modifyBuildingsBtnEle = document.getElementById(`modify-buildings-btn`)
+
+// MODIFY BUILDING FUNCTION
+function modifyBuildingInfo() {
+  const tableBodyEle = document.getElementById('building-table-body');
+
+  const rowsEle = tableBodyEle.querySelectorAll('tr');
+
+  if (rowsEle) {
+    console.log(rowsEle);
+  }
+
+  Array.from(rowsEle).forEach(row => {
+    const infoTableHeads = row.querySelectorAll('td');
+
+    Array.from(infoTableHeads).forEach(th => {
+      const infoTableInput = document.createElement('input');
+      infoTableInput.type = 'text';
+      infoTableInput.value = th.textContent.trim(); 
+
+      th.textContent = ''; 
+      th.appendChild(infoTableInput); 
+    });
+  });
+}
+
+modifyBuildingsBtnEle.addEventListener(`click`, modifyBuildingInfo)
+
+const saveBuildingsBtnEle = document.getElementById(`save-buildings-btn`)
+
+async function saveBuildingDetails() {
+  const tableBodyEle = document.getElementById('building-table-body');
+  const rowsEle = tableBodyEle.querySelectorAll('tr'); 
+
+  const updatedBuildings = [];
+
+  rowsEle.forEach(row => {
+    const cells = row.querySelectorAll('td'); 
+    const buildingData = {
+      building_name: '',
+      building_bce: '',
+      building_address: ''
+    };
+
+    cells.forEach(cell => {
+      const input = cell.querySelector('input');
+      if (input) {
+        if (cell.classList.contains('building-name-details')) {
+          buildingData.building_name = input.value.trim();
+        } else if (cell.classList.contains('building-bce-details')) {
+          buildingData.building_bce = input.value.trim();
+        } else if (cell.classList.contains('building-address-details')) {
+          buildingData.building_address = input.value.trim();
+        }
+      }
+    });
+
+    updatedBuildings.push(buildingData);
+  });
+
+  console.log("Updated Buildings:", updatedBuildings);
+}
+
+saveBuildingsBtnEle.addEventListener(`click`, saveBuildingDetails)
 
 // DELETE BUILDING FUNCTION
 const deleteBuildingButtonEle = document.getElementById('delete-building-btn');
@@ -111,6 +187,7 @@ const deleteThisBuilding = { name: deleteBuildingNameEle.value, bce: deleteBuild
   } catch (error) {
     console.error('Error deleting building:', error);
   }
+  listBuildings();
 };
 
 deleteBuildingButtonEle.addEventListener('click', deleteSelectedBuilding);
