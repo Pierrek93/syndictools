@@ -10,7 +10,7 @@ async function listBuildings() {
   console.log('Fetching buildings...');
 
   try {
-    const response = await fetch("http://localhost:3000/buildings_info?fields=building_name,building_bce,building_adress");
+    const response = await fetch("http://localhost:3000/buildings_info?fields=building_id,building_name,building_bce,building_adress");
     const buildings = await response.json();
 
     console.log(`specific ${buildings}`)
@@ -24,10 +24,12 @@ async function listBuildings() {
         cell.textContent = value;
         
         if (index === 0) {
-          cell.classList.add('building-name-details');
+          cell.classList.add('building-id-details');
         } else if (index === 1) {
-          cell.classList.add('building-bce-details');
+          cell.classList.add('building-name-details');
         } else if (index === 2) {
+          cell.classList.add('building-bce-details');
+        } else if (index === 3) {
           cell.classList.add('building-address-details');
         }
 
@@ -132,6 +134,7 @@ async function saveBuildingDetails() {
   rowsEle.forEach(row => {
     const cells = row.querySelectorAll('td'); 
     const buildingData = {
+      building_id: '',
       building_name: '',
       building_bce: '',
       building_address: ''
@@ -140,13 +143,19 @@ async function saveBuildingDetails() {
     cells.forEach(cell => {
       const input = cell.querySelector('input');
       if (input) {
-        if (cell.classList.contains('building-name-details')) {
+        if (cell.classList.contains('building-id-details')) {
+          buildingData.building_id = input.value.trim();
+        } else if (cell.classList.contains('building-name-details')) {
           buildingData.building_name = input.value.trim();
         } else if (cell.classList.contains('building-bce-details')) {
           buildingData.building_bce = input.value.trim();
         } else if (cell.classList.contains('building-address-details')) {
           buildingData.building_address = input.value.trim();
         }
+        const span = document.createElement('span');
+        span.textContent = input.value.trim();  
+        cell.textContent = '';  
+        cell.appendChild(span); 
       }
     });
 
@@ -154,6 +163,26 @@ async function saveBuildingDetails() {
   });
 
   console.log("Updated Buildings:", updatedBuildings);
+
+  try {
+    const response = await fetch('http://localhost:3000/buildings_info', {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedBuildings),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log('Building information updated:', result);
+    } else {
+      console.log('Error updating building information');
+    }
+  } catch (error) {
+    console.error('Error with the update request:', error);
+  };
+
 }
 
 saveBuildingsBtnEle.addEventListener(`click`, saveBuildingDetails)

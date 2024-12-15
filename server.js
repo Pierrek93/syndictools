@@ -74,27 +74,58 @@ app.post("/buildings_info", (req, res) => {
 
 // Endpoint to update a building's information
 app.put('/buildings_info', (req, res) => {
-  const { building_id, gas_meter, electricity_meter, building_year } = req.body;
+  const buildings = req.body; 
 
-  console.log(`received for modification: `, req.body)
+  console.log('Received buildings for modification: ', buildings);
 
-  const query = `
-    UPDATE buildings_info
-    SET gas_meter = ?, electricity_meter = ?, building_year = ?
-    WHERE building_id = ?
-  `;
+  buildings.forEach(building => {
+    const {
+      building_id, 
+      building_name, 
+      building_bce, 
+      building_adress, 
+      gas_meter, 
+      electricity_meter, 
+      building_year
+    } = building;
 
-  const params = [gas_meter, electricity_meter, building_year, building_id];
+    const fieldsToUpdate = {
+      building_name,
+      building_bce,
+      building_adress,
+      gas_meter,
+      electricity_meter,
+      building_year
+    };
 
-  connection.query(query, params, (err, results) => {
-    if (err) {
-      console.error('Error updating building info:', err);
-      res.status(500).json({ error: 'Failed to update building information' });
-      return;
+    let query = 'UPDATE buildings_info SET ';
+    const params = [];
+
+    for (let field in fieldsToUpdate) {
+      if (fieldsToUpdate[field] !== undefined) {
+        query += `${field} = ?, `;
+        params.push(fieldsToUpdate[field]);
+      }
     }
 
-    res.json({ message: 'Building information updated successfully' });
+    query = query.slice(0, -2); 
+
+    query += ' WHERE building_id = ?';
+    params.push(building_id);
+
+    console.log('Executing query:', query);
+    console.log('With parameters:', params);
+
+    connection.query(query, params, (err, results) => {
+      if (err) {
+        console.error('Error updating building info:', err);
+        res.status(500).json({ error: 'Failed to update building information' });
+        return;
+      }
+    });
   });
+
+  res.json({ message: 'Building information updated successfully' });
 });
 
 // Endpoint to delete a building

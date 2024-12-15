@@ -111,7 +111,7 @@ async function saveBuildingInformation() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify([updatedData]),
     });
 
     if (response.ok) {
