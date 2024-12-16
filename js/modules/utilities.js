@@ -6,7 +6,7 @@ export async function getBuildingInfo() {
   console.log('Fetching buildings names...');
 
     try{
-        const response = await fetch(`http://localhost:3000/buildings_info?fields=building_name,building_bce,building_adress`)
+        const response = await fetch(`http://localhost:3000/buildings_info?fields=building_name,building_bce,building_address`)
         const result = await response.json();
 
         const buildingInfoArray = []
@@ -15,7 +15,7 @@ export async function getBuildingInfo() {
         buildingInfoArray.push({
           name: building.building_name,
           bce: building.building_bce,
-          address: building.building_adress})
+          address: building.building_address})
         })
 
         return buildingInfoArray;

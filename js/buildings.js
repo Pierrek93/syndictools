@@ -10,7 +10,7 @@ async function listBuildings() {
   console.log('Fetching buildings...');
 
   try {
-    const response = await fetch("http://localhost:3000/buildings_info?fields=building_id,building_name,building_bce,building_adress");
+    const response = await fetch("http://localhost:3000/buildings_info?fields=building_id,building_name,building_bce,building_address");
     const buildings = await response.json();
 
     console.log(`specific ${buildings}`)
@@ -25,6 +25,7 @@ async function listBuildings() {
         
         if (index === 0) {
           cell.classList.add('building-id-details');
+          cell.style.display = 'none'
         } else if (index === 1) {
           cell.classList.add('building-name-details');
         } else if (index === 2) {
@@ -51,12 +52,12 @@ const createBuildingsButtonElement = document.getElementById('create-buildings-b
 async function createBuilding() {
   const formElement = document.getElementById('add-building-form');
   const inputElements = formElement.querySelectorAll('input');
-  const newCreatedBuilding = { name: '#', bce: '#', adress: '#' };
+  const newCreatedBuilding = { name: '#', bce: '#', address: '#' };
 
   const propertyMap = {
     'building-name-form': 'name',
     'building-bce-form': 'bce',
-    'building-adress-form': 'adress'
+    'building-address-form': 'address'
   };
 
   inputElements.forEach(element => {

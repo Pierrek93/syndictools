@@ -51,8 +51,8 @@ app.post("/buildings_info", (req, res) => {
   const newBuilding = req.body; 
   console.log("New building data:", newBuilding);
 
-  const query = 'INSERT INTO buildings_info (building_name, building_bce, building_adress) VALUES (?, ?, ?)';
-  const params = [newBuilding.name, newBuilding.bce, newBuilding.adress];
+  const query = 'INSERT INTO buildings_info (building_name, building_bce, building_address) VALUES (?, ?, ?)';
+  const params = [newBuilding.name, newBuilding.bce, newBuilding.address];
 
   connection.query(query, params, (err, results) => {
     if (err) {
@@ -66,7 +66,7 @@ app.post("/buildings_info", (req, res) => {
       building: {
         name: newBuilding.name, 
         bce: newBuilding.bce, 
-        adress: newBuilding.adress
+        address: newBuilding.address
       } 
     });
   });
@@ -83,7 +83,7 @@ app.put('/buildings_info', (req, res) => {
       building_id, 
       building_name, 
       building_bce, 
-      building_adress, 
+      building_address, 
       gas_meter, 
       electricity_meter, 
       building_year
@@ -92,7 +92,7 @@ app.put('/buildings_info', (req, res) => {
     const fieldsToUpdate = {
       building_name,
       building_bce,
-      building_adress,
+      building_address,
       gas_meter,
       electricity_meter,
       building_year
