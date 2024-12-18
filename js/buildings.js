@@ -46,8 +46,38 @@ async function listBuildings() {
 
 listBuildingsButtonElement.addEventListener('click', listBuildings)
 
+//DISPLAY POPUP FUNCTION
+
+const allPopUpButtonEle = document.querySelectorAll(`.pop-up-btn`);
+
+function displayPopUp(event) {
+
+  const allPopUpForms = document.querySelectorAll('.pop-up-form'); // Assuming your pop-ups have a common class
+  allPopUpForms.forEach(form => {
+    form.style.display = 'none';
+  });
+
+  if (event.target.id === `create-buildings-btn`) {
+    const createBuildingPopUpEle = document.getElementById(`add-building-form`)
+    
+    createBuildingPopUpEle.style.display = `block`
+  } 
+  else if  (event.target.id === `delete-building-btn`) {
+    const deleteBuildingPopUpEle = document.getElementById(`delete-building-form`)
+    deleteBuildingPopUpEle.style.display = `block`
+  }
+  else {
+  console.error(`DisplayPopUp Error: Invalid button ID`)
+  }
+confirmAction();
+}
+
+  allPopUpButtonEle.forEach(button => {
+  button.addEventListener('click', displayPopUp);
+  });
+
 //CREATE BUILDING FRONTEND
-const createBuildingsButtonElement = document.getElementById('create-buildings-btn');
+const saveCreatedBuildingEle = document.getElementById(`save-building`)
 
 async function createBuilding() {
   const formElement = document.getElementById('add-building-form');
@@ -90,11 +120,10 @@ async function createBuilding() {
   } catch (error) {
     console.error('Error adding building:', error);
   }
-listBuildings();
+  listBuildings();
 }
 
-createBuildingsButtonElement.addEventListener('click', createBuilding)
-
+saveCreatedBuildingEle.addEventListener('click', createBuilding)
 
 const modifyBuildingsBtnEle = document.getElementById(`modify-buildings-btn`)
 
@@ -189,12 +218,12 @@ async function saveBuildingDetails() {
 saveBuildingsBtnEle.addEventListener(`click`, saveBuildingDetails)
 
 // DELETE BUILDING FUNCTION
-const deleteBuildingButtonEle = document.getElementById('delete-building-btn');
+const deleteBuildingButtonEle = document.getElementById('delete-building');
 
 async function deleteSelectedBuilding() {
-const deleteFollowUpElement = document.getElementById('delete-follow-up')
-const deleteBuildingNameEle = deleteFollowUpElement.querySelector('#delete-building-name')
-const deleteBuildingBceEle = deleteFollowUpElement.querySelector('#delete-building-bce')
+const deleteFollowUpElement = document.getElementById('delete-building-form')
+const deleteBuildingNameEle = deleteFollowUpElement.querySelector('#delete-form-name')
+const deleteBuildingBceEle = deleteFollowUpElement.querySelector('#delete-form-bce')
 
 const deleteThisBuilding = { name: deleteBuildingNameEle.value, bce: deleteBuildingBceEle.value};
 

@@ -57,31 +57,38 @@
                     </table>
                     <div class="buttons-container">
                         <button id="list-buildings-btn">List my Building</button>
-                        <button id="create-buildings-btn" type="submit">Create Building</button>
+                        <button id="create-buildings-btn" class="pop-up-btn" type="submit">Create Building</button>
                         <button id="modify-buildings-btn">Modify Building</button>
-                        <button id="delete-building-btn">Delete Building</button>
+                        <button id="delete-building-btn" class="pop-up-btn">Delete Building</button>
                         <button id="save-buildings-btn">SAVE</button>
                     </div>
 
                     <div class="popup-container">
-                        <div id="delete-follow-up" style="background-color: red; margin-top: 1rem;">
+                        <div id="delete-building-form" class="pop-up-form" style="background-color: red; margin-top: 1rem; display:none">
                             <span>Which building do you wish to delete?</span><br>
-                            <label>Building:</label><input id="delete-building-name" type="text" required/><br>
-                            <label>BCE:</label><input id="delete-building-bce" type="text" required/>
+                            <form id="#">
+                                <label for="delete-building-name">Building Name:</label>
+                                <input type="text" id="delete-form-name" required /><br>
+                                <label for="delete-building-bce">Building BCE:</label>
+                                <input type="text" id="delete-form-bce" required /><br>
+                                <button id="delete-building" type="submit"> Delete Building</button>
+                            </form>
                         </div>
-                        <div id="#" style="background-color: blueviolet; margin-top: 1rem;">
-                            <form id="add-building-form">
+                        <div id="add-building-form" class="pop-up-form" style="background-color: blueviolet; margin-top: 1rem; display:none">
+                            <form id="#">
+                                <span>Create your Building:</span><br>
                                 <label for="building-name-form">Building Name:</label>
                                 <input type="text" id="building-name-form" required /><br>
                                 <label for="building-bce-form">Building BCE:</label>
                                 <input type="text" id="building-bce-form" required /><br>
-                                <label for="building-adress-form">Building Address:</label>
-                                <input type="text" id="building-adress-form" required />
+                                <label for="building-address-form">Building Address:</label>
+                                <input type="text" id="building-address-form" required /> <br>
+                                <button id="save-building" type="submit"> Save New Building</button>
                             </form>
                         </div>
-                        <div class="#" style="background-color: yellow; margin-top: 1rem; text-align: center;">
+                        <div id="confirmation-pop-up" class="pop-up-form" style="background-color: yellow; margin-top: 1rem; text-align: center;">
                             <span>Are you sure?</span><br>
-                            <button id="delete-building-btn">Yes</button><button id="donotdelete-building-btn">No</button>
+                            <button id="yes-btn">Yes</button><button id="no-btn">No</button>
                         </div>
                     </div>
                 </div>
