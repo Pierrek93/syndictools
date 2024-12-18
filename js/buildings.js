@@ -49,32 +49,56 @@ listBuildingsButtonElement.addEventListener('click', listBuildings)
 //DISPLAY POPUP FUNCTION
 
 const allPopUpButtonEle = document.querySelectorAll(`.pop-up-btn`);
+let formSelection = ``
 
 function displayPopUp(event) {
 
-  const allPopUpForms = document.querySelectorAll('.pop-up-form'); // Assuming your pop-ups have a common class
+  const allPopUpForms = document.querySelectorAll('.pop-up-form');
   allPopUpForms.forEach(form => {
     form.style.display = 'none';
   });
 
   if (event.target.id === `create-buildings-btn`) {
     const createBuildingPopUpEle = document.getElementById(`add-building-form`)
-    
     createBuildingPopUpEle.style.display = `block`
+    formSelection = `Building Creation`
   } 
   else if  (event.target.id === `delete-building-btn`) {
     const deleteBuildingPopUpEle = document.getElementById(`delete-building-form`)
     deleteBuildingPopUpEle.style.display = `block`
+    formSelection = `Building Deletion`
   }
   else {
   console.error(`DisplayPopUp Error: Invalid button ID`)
   }
-confirmAction();
-}
+
+  return formSelection
+};
 
   allPopUpButtonEle.forEach(button => {
   button.addEventListener('click', displayPopUp);
   });
+
+//CONFIRMATION ACTION FUNCTION
+function confirmAction (formSelection) {
+
+  const confirmationPopUpEle = document.getElementById(`confirmation-pop-up`)
+  const yesBtnEle = confirmationPopUpEle.querySelector(`#yes-btn`)
+  const noBtnEle = confirmationPopUpEle.querySelector(`#no-btn`)
+
+  console.log(formSelection)
+  confirmationPopUpEle.style.display = `block`;
+
+  yesBtnEle.addEventListener(`click`, () => {
+    if (formSelection === `Building Creation`) {
+      console.log(`CREATING BUILDING!`)
+    }
+    else if (formSelection === `Building Deletion`) {
+      console.log(`DELETING BUILDING!`)
+    }
+    formSelection = ``
+  })
+};
 
 //CREATE BUILDING FRONTEND
 const saveCreatedBuildingEle = document.getElementById(`save-building`)
@@ -123,7 +147,9 @@ async function createBuilding() {
   listBuildings();
 }
 
-saveCreatedBuildingEle.addEventListener('click', createBuilding)
+saveCreatedBuildingEle.addEventListener('click', () => {
+  confirmAction(formSelection);
+})
 
 const modifyBuildingsBtnEle = document.getElementById(`modify-buildings-btn`)
 
@@ -249,4 +275,6 @@ const deleteThisBuilding = { name: deleteBuildingNameEle.value, bce: deleteBuild
   listBuildings();
 };
 
-deleteBuildingButtonEle.addEventListener('click', deleteSelectedBuilding);
+deleteBuildingButtonEle.addEventListener('click', () => {
+  confirmAction(formSelection);
+})
